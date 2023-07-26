@@ -10,7 +10,16 @@
       Title="LoginPage">
 
     <Grid>
-        <Grid  Background="OrangeRed" Visibility="{Binding LoginPageVisibility}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <TextBlock Background="OrangeRed" TextAlignment="Center" FontSize="100">
+                TAP.AZ
+            </TextBlock>
+        </Grid>
+        <Grid  Background="OrangeRed" Visibility="{Binding LoginPageVisibility}" Grid.Column="1">
             <StackPanel x:Name="Register_SP" Background="OrangeRed" Visibility="{Binding RegisterSPVisibility}" >
                 <TextBlock  HorizontalAlignment="Right" Height="25" Width="100" Background="Transparent" Margin="0,150,110,0" FontSize="20" Foreground="White"><Run Text="Email:"/></TextBlock>
                 <TextBox Text="{Binding Email}"  HorizontalAlignment="Right" Height="21" Width="200" Background="White"  Margin="0,0,10,0" FontSize="15"/>

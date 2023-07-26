@@ -81,13 +81,14 @@
                         <TextBlock Text="Model:"/>
                         <ComboBox ItemsSource="{Binding SelectedCarMarka.models,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name"/>
                         <TextBlock Text="Color:"/>
-                        <ComboBox ></ComboBox>
+                        <ComboBox  ItemsSource="{Binding Colors,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name"></ComboBox>
+                        <TextBlock Text="Salon:"/>
+                        <ComboBox ItemsSource="{Binding CarSalonCategory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="Motor:"/>
                         <TextBox Text="{Binding NewCarProduct.Motor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="Salon:"/>
-                        <TextBox Text="{Binding NewCarProduct.Salon, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="Image:"/>
                         <TextBox Text="{Binding NewCarProduct.ImageUri, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button HorizontalAlignment="Right" Height="20" Width="80" Command="{Binding ImageFileDialogCommand}">Browse</Button>
                         <TextBlock Text="Description:"/>
                         <TextBox Height="50" Text="{Binding NewCarProduct.Description, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>

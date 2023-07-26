@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="JsonFiles\cars.json" />
+    <None Remove="JsonFiles\colors.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="JsonFiles\cars.json" />
+    <EmbeddedResource Include="JsonFiles\colors.json" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,11 +30,13 @@ namespace TapAzImtahan.ViewModel
             carMarkas = new ObservableCollection<CarMarkaClass>();
             selectedCarMarka = new CarMarkaClass();
             FillCardMarkaModels();
+            FillColors();
             CurrentProducts = Products;
             ShowSelectedProductCommand = new RelayCommand(ShowSelectedProduct);
             AddCommand = new RelayCommand(AddProduct, CanAddProduct);
             OnlyCarsCommand = new RelayCommand(ShowOnlyCars);
             EveryProducCommand = new RelayCommand(ShowAllProducts);
+            ImageFileDialogCommand=new RelayCommand(ImageFileDialogExecute);
         }
         public ICommand? ShowSelectedProductCommand { get; set; }
         public ICommand? AddCommand { get; set; }
@@ -41,6 +44,7 @@ namespace TapAzImtahan.ViewModel
         public ICommand? OnlyCarsCommand { get; set; }
         public ICommand? OnlyElectronicsCommand { get; set; }
         public ICommand? OnlyPetsCommand { get; set; }
+        public ICommand? ImageFileDialogCommand { get; set; }
         public ICommand? RegisterProductCommand { get; set; }
         public ICommand ComboBoxSelectionChangedCommand { get; set; }
 
@@ -48,12 +52,24 @@ namespace TapAzImtahan.ViewModel
         public ObservableCollection<Product> CurrentProducts { get => currentProducts; set { currentProducts = value; OnPropertyChanged(nameof(currentProducts)); } }
         public ObservableCollection<Product> TempProducts { get; set; }
         public ObservableCollection<string> ProductCategories { get; set; } = new ObservableCollection<string>() { "Car", "Electronic", "Pet" };
+        public ObservableCollection<string> CarSalonCategory { get; set; } = new ObservableCollection<string>() { "Koja", "Vlyur"};
         public ObservableCollection<CarMarkaClass> CarMarkas { get => carMarkas; set { carMarkas = value; OnPropertyChanged(nameof(CarMarkas)); } }
         public CarMarkaClass SelectedCarMarka { get => selectedCarMarka; set { selectedCarMarka = value; OnPropertyChanged(nameof(SelectedCarMarka)); } }
+        public ObservableCollection<ColorsJson> Colors { get => colors; set { colors = value; OnPropertyChanged(nameof(Colors)); } }
 
-        public ObservableCollection<string> Colors { get; set; } = new ObservableCollection<string>();
-
-
+        private string? selectedImageUri;
+        public string? SelectedImageUri
+        {
+            get => SelectedImageUri;
+            set
+            {
+                if (selectedImageUri != value)
+                {
+                    selectedImageUri = value;
+                    OnPropertyChanged(nameof(SelectedImageUri));
+                }
+            }
+        }
 
         private void OnComboBoxSelectionChanged(string? value)
         {
@@ -121,6 +137,7 @@ namespace TapAzImtahan.ViewModel
         private ObservableCollection<Product> currentProducts;
         private ObservableCollection<CarMarkaClass> carMarkas;
         private CarMarkaClass selectedCarMarka;
+        private ObservableCollection<ColorsJson> colors = new ObservableCollection<ColorsJson>();
 
         public bool IsEnable
         {
@@ -155,6 +172,23 @@ namespace TapAzImtahan.ViewModel
             CurrentProducts = TempProducts;
         }
 
+        public void ImageFileDialogExecute(object? image)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*",
+                Title = "Select an Image"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedImagePath = openFileDialog.FileName;
+                // Here, you can use the selectedImagePath as the URI for your image.
+                // For example, if you are displaying the image in an Image control:
+                // imageControl.Source = new BitmapImage(new Uri(selectedImagePath));
+                SelectedImageUri = selectedImagePath;
+            }
+        }
         public void AddProduct(object? parameter)
         {
             if (NewCarProduct.Make == null)
@@ -214,11 +248,11 @@ namespace TapAzImtahan.ViewModel
         public void FillColors()
         {
             string jsonData = ReadEmbeddedJsonFile("colors.json");
-            List<CarMarkaClass> carsList = JsonSerializer.Deserialize<List<CarMarkaClass>>(jsonData);
+            List<ColorsJson> colorsList = JsonSerializer.Deserialize<List<ColorsJson>>(jsonData);
 
-            foreach (var car in Colors)
+            foreach (var color in colorsList)
             {
-                Colors.Add(car);
+                Colors.Add(color);
             }
         }
         public void OpenPRoductRegistration(object? parameter)
