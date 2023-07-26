@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -25,15 +26,20 @@ namespace TapAzImtahan
     public partial class MainWindow : Window
     {
         public TapAzAccount? LoggedAccount { get; set; }
+
+        
+
         public MainWindow()
         {
             InitializeComponent();
 
+    
             LoginPageViewModel loginViewModel = new LoginPageViewModel();
-            loginViewModel.MainFrame = LogFrame; 
+            LoggedAccount = loginViewModel.LoggedAccountLoginVM;
+            loginViewModel.MainFrame = LogFrame;
             LoginPage loginPage = new LoginPage();
             loginPage.DataContext = loginViewModel;
-
+            
             LogFrame.NavigationService.Navigate(loginPage);
         }
 

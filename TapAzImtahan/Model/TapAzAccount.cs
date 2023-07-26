@@ -8,7 +8,7 @@ namespace TapAzImtahan.Model
 {
     public class TapAzAccount
     {
-        public TapAzAccount(string? email, string? password, string? name, string? surname, DateTime age)
+        public TapAzAccount(string? email, string? password, string? name, string? surname, DateTime? age)
         {
             Email = email;
             Password = password;
@@ -21,7 +21,7 @@ namespace TapAzImtahan.Model
         public string? Password { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
-        public DateTime Age { get; set; }
+        public DateTime? Age { get; set; }
 
 
 

@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TapAzImtahan.ViewModel;
 
 namespace TapAzImtahan.View
 {
     /// <summary>
-    /// Interaction logic for TapAzMainMenu.xaml
+    /// Interaction logic for ProductsView.xaml
     /// </summary>
-    public partial class TapAzMainMenu : Page
+    public partial class ProductsView : Page
     {
-        public TapAzMainMenu()
+        public ProductsView()
         {
             InitializeComponent();
-            DataContext=new MainMenuViewModel();
         }
     }
 }

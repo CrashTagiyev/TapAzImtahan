@@ -4,11 +4,26 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TapAzImtahan.View"
+      xmlns:viewModel="clr-namespace:TapAzImtahan.ViewModel"
+      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TapAzMainMenu">
 
+    <Page.DataContext>
+        <viewModel:MainMenuViewModel/>
+    </Page.DataContext>
+
     <Grid Background="Azure">
-        <TextBlock FontSize="100">mainmenu</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="6.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"  Background="OrangeRed">
+            <TextBlock FontSize="40">Header</TextBlock>
+        </Grid>
+            <Grid Grid.Row="1" Visibility="Visible" Background="Azure" >
+                <Frame Content="{Binding CurrentPage}"/>
+            </Grid>
     </Grid>
 </Page>

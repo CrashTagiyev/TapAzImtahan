@@ -22,8 +22,8 @@
                 <TextBox  Text="{Binding Surname}" HorizontalAlignment="Right" Height="21" Width="200" Background="White"  Margin="0,0,10,0" FontSize="15"/>
                 <TextBlock HorizontalAlignment="Right" Height="25" Width="100" Background="Transparent" Margin="0,0,110,0" FontSize="20" Foreground="White"><Run Text="BirthDay:"/></TextBlock>
                 <DatePicker SelectedDate="{Binding BirthDay}" Width="200" HorizontalAlignment="Right" Margin="0,0,10,0" ></DatePicker>
-                <Button Command="{Binding RegisterNewAccountCommand}" Height="20" Width="120" HorizontalAlignment="Right" Margin="0,20,60,0">Register
-                </Button>
+                <Button Command="{Binding RegisterNewAccountCommand}" Height="20" Width="120" HorizontalAlignment="Right" Margin="0,20,60,0">Register</Button>
+                <Button Command="{Binding GoBackToLoginCommand}" Height="20" Width="120" HorizontalAlignment="Right" Margin="0,20,60,0">Back</Button>
             </StackPanel>
             <StackPanel Background="OrangeRed" Visibility="{Binding LoginStackPanelVisibility}">
                 <TextBlock Margin="0,150,110,0" Style="{StaticResource Login_TextBlock_Stytle}"><Run  Text="Email:" /></TextBlock>

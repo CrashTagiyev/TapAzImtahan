@@ -15,14 +15,31 @@ using TapAzImtahan.View;
 using TapAzImtahan.Model;
 using TapAzImtahan.Command;
 using TapAzImtahan.ViewModel;
+using TapAzImtahan.Helper;
 
 namespace TapAzImtahan.ViewModel
 {
 
     public class LoginPageViewModel : INotifyPropertyChanged
     {
+        private TapAzAccount? loggedAccountLoginVM;
+
+        public TapAzAccount? LoggedAccountLoginVM
+        {
+            get { return loggedAccountLoginVM; }
+            set { loggedAccountLoginVM = value; }
+        }
+
+        public LoginPageViewModel()
+        {
+            RegisterNewAccountCommand = new RelayCommand(RegisterNewAccountExecute);
+            LogInCommand = new RelayCommand(LoginExecute, canLogin);
+            RegisterCommand = new RelayCommand(RegisterExecute);
+            GoBackToLoginCommand = new RelayCommand(GoBackToLoginExecute);
+        }
+
         public ObservableCollection<TapAzAccount> Accounts { get; set; } = new ObservableCollection<TapAzAccount>() {
-        new TapAzAccount("e@gmail.com","5458","Emil","Surname",new DateTime(1994,6,17)),
+        new TapAzAccount("qwe","qwe","Emil","Surname",new DateTime(1994,6,17)),
         new TapAzAccount("D@gmail.com","3333","Duman","Vezirov",new DateTime(1996,2,23)),
         new TapAzAccount("N@gmail.com","2323","Elnur","Haciyev",new DateTime(1999,9,19))
         };
@@ -41,11 +58,27 @@ namespace TapAzImtahan.ViewModel
 
 
         public ICommand? LogInCommand { get; set; }
-
         public ICommand RegisterCommand { get; set; }
         public ICommand RegisterNewAccountCommand { get; set; }
+        public ICommand GoBackToLoginCommand { get; set; }
 
         private Visibility? loginPageVisibility = Visibility.Visible;
+
+
+        private MainMenuViewModel mainMenuViewModel;
+
+        public MainMenuViewModel MainMenuViewModel
+        {
+            get { return mainMenuViewModel; }
+            set { mainMenuViewModel = value; OnPropertyChanged(nameof(MainMenuViewModel)); }
+        }
+        private TapAzMainMenu tapAzMM;
+
+        public TapAzMainMenu TapAzMM
+        {
+            get { return tapAzMM; }
+            set { tapAzMM = value; OnPropertyChanged(nameof(TapAzMM)); }
+        }
 
         public Visibility? LoginPageVisibility
         {
@@ -120,7 +153,7 @@ namespace TapAzImtahan.ViewModel
         private string? _password;
         public string? Password { get => _password; set { _password = value; OnPropertyChanged(nameof(Password)); } }
         //
-        private DateTime _birthday=new DateTime(2021,1,1);
+        private DateTime _birthday = new DateTime(2021, 1, 1);
         public DateTime BirthDay { get => _birthday; set { _birthday = value; OnPropertyChanged(nameof(BirthDay)); } }
 
 
@@ -132,17 +165,32 @@ namespace TapAzImtahan.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public LoginPageViewModel()
-        {
-            RegisterNewAccountCommand = new RelayCommand(RegisterNewAccountExecute);
-            LogInCommand = new RelayCommand(LoginExecute, canLogin);
-            RegisterCommand = new RelayCommand(RegisterExecute);
-        }
 
         public void LoginExecute(object? parameter)
         {
-            MainFrame.NavigationService.Navigate(new TapAzMainMenu());
-            //LoginPageVisibility = Visibility.Hidden;
+            try
+            {
+
+                for (int i = 0; i < Accounts.Count; i++)
+                {
+                    if (Login == Accounts[i].Password && LoginPassword == Accounts[i].Password)
+                    {
+                        loggedAccountLoginVM = Accounts[i];
+                        MainMenuViewModel = new MainMenuViewModel();
+                        TapAzMM = new TapAzMainMenu();
+                        MainMenuViewModel.LoggedTapAzAccount = loggedAccountLoginVM;
+                        TapAzMM.DataContext = MainMenuViewModel;
+                        MainFrame.NavigationService.Navigate(TapAzMM);
+                        return;
+                    }
+                }
+                throw new Exception("Account did not found.Login or password is wrong");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         bool canLogin(object? parameter) => true;
@@ -157,16 +205,30 @@ namespace TapAzImtahan.ViewModel
         {
             try
             {
-
-                if (Email == "" || Password == "" || Name == "" || Surname == "" || BirthDay.Year == 0001) throw new Exception("Fill the everything for registration");
-                RegisterSPVisibility = Visibility.Hidden;
-                LoginStackPanelVisibility = Visibility.Visible;
+                if (Email == null || Password == null || Name == null || Surname == null || BirthDay.Year == 0001) throw new Exception("Fill the every box for registration");
+                else
+                {
+                    foreach (var item in Accounts)
+                    {
+                        if (Email == item.Email) throw new Exception("This Email is already taken");
+                    }
+                    Accounts.Add(new TapAzAccount(Email, Password, Name, Surname, BirthDay));
+                    RegisterSPVisibility = Visibility.Hidden;
+                    LoginStackPanelVisibility = Visibility.Visible;
+                    MessageBox.Show("Account succeccfully created,you can login now!");
+                }
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public void GoBackToLoginExecute(object? parameter)
+        {
+            RegisterSPVisibility = Visibility.Hidden;
+            LoginStackPanelVisibility = Visibility.Visible;
         }
     }
 }

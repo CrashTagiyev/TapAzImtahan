@@ -2,6 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TapAzImtahan"
+             xmlns:viewModel="clr-namespace:TapAzImtahan.ViewModel"
+             xmlns:view="clr-namespace:TapAzImtahan.View"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="Login_TextBlock_Stytle" TargetType="TextBlock">
@@ -12,8 +14,13 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="HorizontalAlignment" Value="Right"></Setter>
         </Style>
-        <Style x:Key="Register_TextBox_Style" TargetType="TextBox">
-            
-        </Style>
+
+        <DataTemplate DataType="{x:Type viewModel:MainMenuViewModel}">
+            <view:TapAzMainMenu/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ProductsViewModel}">
+            <view:ProductsView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>
