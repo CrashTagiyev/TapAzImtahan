@@ -8,40 +8,604 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginPage">
+    <Page.Resources>
+        <Style x:Key="HoverTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" Background="Transparent" BorderBrush="Gray" BorderThickness="1">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4500"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
-    <Grid>
+
+
+
+
+    <Grid Background="#E0E0E0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid>
-            <TextBlock Background="OrangeRed" TextAlignment="Center" FontSize="100">
-                TAP.AZ
-            </TextBlock>
+
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="0.8*"></RowDefinition>
+                <RowDefinition Height="0.4*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions   >
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="1" Grid.Column="1" Foreground="#FF4500" FontSize="70" FontWeight="DemiBold">Tap.Az</TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="43*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="22" FontWeight="DemiBold" Grid.Column="1">The world's largest online sales site</TextBlock>
+            </Grid>
+        </Grid >
+
+        <Grid x:Name="Register_SP"  Visibility="{Binding RegisterSPVisibility}" Grid.Column="1">
+            <Grid  Height="450" >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="15*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="18*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+
+                    <!--Main Border-->
+                    <Border Grid.Column="1" Background="White" BorderBrush="Gray" BorderThickness="1" >
+                        <!--Border gorunus ucun resourcelre-->
+                        <Border.Resources>
+
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="7"/>
+                            </Style>
+                        </Border.Resources>
+
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="4" Color="Black" Opacity="0.8" BlurRadius="5" Direction="180"/>
+                        </Border.Effect>
+
+                        <!--Borderin icindeki buto grid-->
+                        <Grid>
+                            <!--border icindeki rowlar-->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.8*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.8*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.8*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.8*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.5*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.5*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <!--border icindeki rowlarin icindeki gridler-->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">Name</TextBlock>
+                                <TextBlock Grid.Column="3" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">Surname</TextBlock>
+
+                            </Grid>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding Name}"  Style="{StaticResource HoverTextBoxStyle}"  Grid.Column="1" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">
+
+                                    <TextBox.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+                                <TextBox Text="{Binding Surname}"  Style="{StaticResource HoverTextBoxStyle}"  Grid.Column="3" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">
+
+                                    <TextBox.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.06*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20" >E-Mail</TextBlock>
+
+                            </Grid>
+
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBox  Text="{Binding Email}" Style="{StaticResource HoverTextBoxStyle}"  Grid.Column="1" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">
+
+                                    <TextBox.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                            </Grid>
+
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.06*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">Password</TextBlock>
+
+                            </Grid>
+
+                            <Grid Grid.Row="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding Password}"  Style="{StaticResource HoverTextBoxStyle}"  Grid.Column="1" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">
+
+                                    <TextBox.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                            </Grid>
+
+                            <Grid Grid.Row="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">Birthday</TextBlock>
+
+                            </Grid>
+
+                            <Grid Grid.Row="7">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="1" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20" >
+                                    <ComboBoxItem>1</ComboBoxItem>
+                                    <ComboBoxItem>2</ComboBoxItem>
+                                    <ComboBoxItem>3</ComboBoxItem>
+                                    <ComboBoxItem>4</ComboBoxItem>
+                                    <ComboBoxItem>5</ComboBoxItem>
+                                    <ComboBoxItem>6</ComboBoxItem>
+                                    <ComboBoxItem>7</ComboBoxItem>
+                                    <ComboBoxItem>8</ComboBoxItem>
+                                    <ComboBoxItem>9</ComboBoxItem>
+                                    <ComboBoxItem>10</ComboBoxItem>
+                                    <ComboBoxItem>11</ComboBoxItem>
+                                    <ComboBoxItem>12</ComboBoxItem>
+                                    <ComboBoxItem>13</ComboBoxItem>
+                                    <ComboBoxItem>14</ComboBoxItem>
+                                    <ComboBoxItem>15</ComboBoxItem>
+                                    <ComboBoxItem>16</ComboBoxItem>
+                                    <ComboBoxItem>17</ComboBoxItem>
+                                    <ComboBoxItem>18</ComboBoxItem>
+                                    <ComboBoxItem>19</ComboBoxItem>
+                                    <ComboBoxItem>20</ComboBoxItem>
+                                    <ComboBoxItem>21</ComboBoxItem>
+                                    <ComboBoxItem>22</ComboBoxItem>
+                                    <ComboBoxItem>23</ComboBoxItem>
+                                    <ComboBoxItem>24</ComboBoxItem>
+                                    <ComboBoxItem>25</ComboBoxItem>
+                                    <ComboBoxItem>26</ComboBoxItem>
+                                    <ComboBoxItem>27</ComboBoxItem>
+                                    <ComboBoxItem>28</ComboBoxItem>
+                                    <ComboBoxItem>29</ComboBoxItem>
+                                    <ComboBoxItem>30</ComboBoxItem>
+                                    <ComboBoxItem>31</ComboBoxItem>
+                                </ComboBox>
+                                <ComboBox Grid.Column="3" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">
+                                    <ComboBoxItem>January</ComboBoxItem>
+                                    <ComboBoxItem>February</ComboBoxItem>
+                                    <ComboBoxItem>March</ComboBoxItem>
+                                    <ComboBoxItem>April</ComboBoxItem>
+                                    <ComboBoxItem>May</ComboBoxItem>
+                                    <ComboBoxItem>June</ComboBoxItem>
+                                    <ComboBoxItem>July</ComboBoxItem>
+                                    <ComboBoxItem>August</ComboBoxItem>
+                                    <ComboBoxItem>September</ComboBoxItem>
+                                    <ComboBoxItem>October</ComboBoxItem>
+                                    <ComboBoxItem>November</ComboBoxItem>
+                                    <ComboBoxItem>December</ComboBoxItem>
+
+                                </ComboBox>
+                                <ComboBox Grid.Column="5" Foreground="#FF4500" FontWeight="DemiBold" FontSize="20">
+                                    <ComboBoxItem>2023</ComboBoxItem>
+                                    <ComboBoxItem>2022</ComboBoxItem>
+                                    <ComboBoxItem>2021</ComboBoxItem>
+                                    <ComboBoxItem>2020</ComboBoxItem>
+                                    <ComboBoxItem>2019</ComboBoxItem>
+                                    <ComboBoxItem>2018</ComboBoxItem>
+                                    <ComboBoxItem>2017</ComboBoxItem>
+                                    <ComboBoxItem>2016</ComboBoxItem>
+                                    <ComboBoxItem>2015</ComboBoxItem>
+                                    <ComboBoxItem>2014</ComboBoxItem>
+                                    <ComboBoxItem>2013</ComboBoxItem>
+                                    <ComboBoxItem>2012</ComboBoxItem>
+                                    <ComboBoxItem>2011</ComboBoxItem>
+                                    <ComboBoxItem>2010</ComboBoxItem>
+                                    <ComboBoxItem>2009</ComboBoxItem>
+                                    <ComboBoxItem>2008</ComboBoxItem>
+                                    <ComboBoxItem>2007</ComboBoxItem>
+                                    <ComboBoxItem>2006</ComboBoxItem>
+                                    <ComboBoxItem>2005</ComboBoxItem>
+                                    <ComboBoxItem>2004</ComboBoxItem>
+                                    <ComboBoxItem>2003</ComboBoxItem>
+                                    <ComboBoxItem>2002</ComboBoxItem>
+                                    <ComboBoxItem>2001</ComboBoxItem>
+                                    <ComboBoxItem>2000</ComboBoxItem>
+                                    <ComboBoxItem>1999</ComboBoxItem>
+                                    <ComboBoxItem>1998</ComboBoxItem>
+                                    <ComboBoxItem>1997</ComboBoxItem>
+                                    <ComboBoxItem>1996</ComboBoxItem>
+                                    <ComboBoxItem>1995</ComboBoxItem>
+                                    <ComboBoxItem>1994</ComboBoxItem>
+                                    <ComboBoxItem>1993</ComboBoxItem>
+                                    <ComboBoxItem>1992</ComboBoxItem>
+                                    <ComboBoxItem>1991</ComboBoxItem>
+                                    <ComboBoxItem>1990</ComboBoxItem>
+                                    <ComboBoxItem>1989</ComboBoxItem>
+                                    <ComboBoxItem>1988</ComboBoxItem>
+                                    <ComboBoxItem>1987</ComboBoxItem>
+                                    <ComboBoxItem>1986</ComboBoxItem>
+                                    <ComboBoxItem>1985</ComboBoxItem>
+                                    <ComboBoxItem>1984</ComboBoxItem>
+                                    <ComboBoxItem>1983</ComboBoxItem>
+                                    <ComboBoxItem>1982</ComboBoxItem>
+                                    <ComboBoxItem>1981</ComboBoxItem>
+                                    <ComboBoxItem>1980</ComboBoxItem>
+                                    <ComboBoxItem>1979</ComboBoxItem>
+                                    <ComboBoxItem>1978</ComboBoxItem>
+                                    <ComboBoxItem>1977</ComboBoxItem>
+                                    <ComboBoxItem>1976</ComboBoxItem>
+                                    <ComboBoxItem>1975</ComboBoxItem>
+                                    <ComboBoxItem>1974</ComboBoxItem>
+                                    <ComboBoxItem>1973</ComboBoxItem>
+                                    <ComboBoxItem>1972</ComboBoxItem>
+                                    <ComboBoxItem>1971</ComboBoxItem>
+                                    <ComboBoxItem>1970</ComboBoxItem>
+                                    <ComboBoxItem>1969</ComboBoxItem>
+                                    <ComboBoxItem>1968</ComboBoxItem>
+                                    <ComboBoxItem>1967</ComboBoxItem>
+                                    <ComboBoxItem>1966</ComboBoxItem>
+                                    <ComboBoxItem>1965</ComboBoxItem>
+                                    <ComboBoxItem>1964</ComboBoxItem>
+                                    <ComboBoxItem>1963</ComboBoxItem>
+                                    <ComboBoxItem>1962</ComboBoxItem>
+                                    <ComboBoxItem>1961</ComboBoxItem>
+                                    <ComboBoxItem>1960</ComboBoxItem>
+                                    <ComboBoxItem>1959</ComboBoxItem>
+                                    <ComboBoxItem>1958</ComboBoxItem>
+                                    <ComboBoxItem>1957</ComboBoxItem>
+                                    <ComboBoxItem>1956</ComboBoxItem>
+                                    <ComboBoxItem>1955</ComboBoxItem>
+                                    <ComboBoxItem>1954</ComboBoxItem>
+                                    <ComboBoxItem>1953</ComboBoxItem>
+                                    <ComboBoxItem>1952</ComboBoxItem>
+                                    <ComboBoxItem>1951</ComboBoxItem>
+                                    <ComboBoxItem>1950</ComboBoxItem>
+                                    <ComboBoxItem>1949</ComboBoxItem>
+                                    <ComboBoxItem>1948</ComboBoxItem>
+                                    <ComboBoxItem>1947</ComboBoxItem>
+                                    <ComboBoxItem>1946</ComboBoxItem>
+                                    <ComboBoxItem>1945</ComboBoxItem>
+                                    <ComboBoxItem>1944</ComboBoxItem>
+                                    <ComboBoxItem>1943</ComboBoxItem>
+                                    <ComboBoxItem>1942</ComboBoxItem>
+                                    <ComboBoxItem>1941</ComboBoxItem>
+                                    <ComboBoxItem>1940</ComboBoxItem>
+                                    <ComboBoxItem>1939</ComboBoxItem>
+                                    <ComboBoxItem>1938</ComboBoxItem>
+                                    <ComboBoxItem>1937</ComboBoxItem>
+                                    <ComboBoxItem>1936</ComboBoxItem>
+                                    <ComboBoxItem>1935</ComboBoxItem>
+                                    <ComboBoxItem>1934</ComboBoxItem>
+                                </ComboBox>
+
+                            </Grid>
+
+                            <Grid Grid.Row="9">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition ></ColumnDefinition>
+                                    <ColumnDefinition  Width="0.3*"></ColumnDefinition>
+                                    <ColumnDefinition ></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <Button Foreground="White" FontWeight="DemiBold" FontSize="20" Command="{Binding GoBackToLoginCommand}" Content="Back" >
+
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" Background="#FF4500" BorderBrush="Gray" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="BorderBrush" Value="#FF4500"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button Command="{Binding RegisterNewAccountCommand}" Grid.Column="2" Foreground="White" Background="#FF4500" FontWeight="DemiBold" FontSize="20" Content="Sign Up">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" Background="#FF4500" BorderBrush="Gray" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="BorderBrush" Value="#FF4500"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </Grid>
+
+
+
         </Grid>
-        <Grid  Background="OrangeRed" Visibility="{Binding LoginPageVisibility}" Grid.Column="1">
-            <StackPanel x:Name="Register_SP" Background="OrangeRed" Visibility="{Binding RegisterSPVisibility}" >
-                <TextBlock  HorizontalAlignment="Right" Height="25" Width="100" Background="Transparent" Margin="0,150,110,0" FontSize="20" Foreground="White"><Run Text="Email:"/></TextBlock>
-                <TextBox Text="{Binding Email}"  HorizontalAlignment="Right" Height="21" Width="200" Background="White"  Margin="0,0,10,0" FontSize="15"/>
-                <TextBlock HorizontalAlignment="Right" Height="25" Width="100" Background="Transparent" Margin="0,0,110,0" FontSize="20" Foreground="White"><Run Text="Password:"/></TextBlock>
-                <TextBox Text="{Binding Password}" HorizontalAlignment="Right"  Height="21" Width="200" Background="White"  Margin="0,0,10,0" FontSize="15"/>
-                <TextBlock HorizontalAlignment="Right" Height="25" Width="100" Background="Transparent" Margin="0,0,110,0" FontSize="20" Foreground="White"><Run Text="Name:"/></TextBlock>
-                <TextBox  Text="{Binding Name}" HorizontalAlignment="Right" Height="21" Width="200" Background="White"  Margin="0,0,10,0" FontSize="15"/>
-                <TextBlock HorizontalAlignment="Right" Height="25" Width="100" Background="Transparent" Margin="0,0,110,0" FontSize="20" Foreground="White"><Run Text="Surname:"/></TextBlock>
-                <TextBox  Text="{Binding Surname}" HorizontalAlignment="Right" Height="21" Width="200" Background="White"  Margin="0,0,10,0" FontSize="15"/>
-                <TextBlock HorizontalAlignment="Right" Height="25" Width="100" Background="Transparent" Margin="0,0,110,0" FontSize="20" Foreground="White"><Run Text="BirthDay:"/></TextBlock>
-                <DatePicker SelectedDate="{Binding BirthDay}" Width="200" HorizontalAlignment="Right" Margin="0,0,10,0" ></DatePicker>
-                <Button Command="{Binding RegisterNewAccountCommand}" Height="20" Width="120" HorizontalAlignment="Right" Margin="0,20,60,0">Register</Button>
-                <Button Command="{Binding GoBackToLoginCommand}" Height="20" Width="120" HorizontalAlignment="Right" Margin="0,20,60,0">Back</Button>
-            </StackPanel>
-            <StackPanel Background="OrangeRed" Visibility="{Binding LoginStackPanelVisibility}">
-                <TextBlock Margin="0,150,110,0" Style="{StaticResource Login_TextBlock_Stytle}"><Run  Text="Email:" /></TextBlock>
-                <TextBox HorizontalAlignment="Right"  Height="21" Width="200" Background="White" Text="{Binding Login}" Margin="0,0,10,0" FontSize="15"/>
-                <TextBlock Style="{StaticResource Login_TextBlock_Stytle}" Margin="0,0,110,0"><Run Text="Password:"/></TextBlock>
-                <PasswordBox HorizontalAlignment="Right" local:PasswordBoxAssistant.BindPassword="True" local:PasswordBoxAssistant.BoundPassword="{Binding LoginPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="20" Width="200" Background="White"  Margin="0,0,10,0" FontSize="15" />
-                <Button HorizontalAlignment="Right" x:Name="LoginButton" Height="25" Width="120" Margin="0,20,60,0"  Command="{Binding LogInCommand}" Content="Log In"/>
-                <Button HorizontalAlignment="Right" Height="25" Width="120" Margin="0,10,60,0" Command="{Binding RegisterCommand}" >Register></Button>
-            </StackPanel>
+
+
+        <Grid  Visibility="{Binding LoginStackPanelVisibility}"   Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="15*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="18*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+
+                <!--Main Border-->
+                <Border Grid.Column="1" Background="White" BorderBrush="Gray" BorderThickness="1">
+                    <!--Border gorunus ucun resourcelre-->
+                    <Border.Resources>
+
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Border.Resources>
+
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="4" Color="Black" Opacity="0.8" BlurRadius="5" Direction="180"/>
+                    </Border.Effect>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.2*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="1.2*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="0.3*"></RowDefinition>
+                            <RowDefinition Height="1.2*"></RowDefinition>
+                            <RowDefinition Height="0.3*"  ></RowDefinition>
+                            <RowDefinition Height="0.03*"></RowDefinition>
+                            <RowDefinition Height="0.5*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Text="Log In" FontSize="35" FontWeight="DemiBold" Foreground="#FF4500"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="10*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBox  Text="{Binding Login}" Style="{StaticResource HoverTextBoxStyle}"  Grid.Column="1">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="4"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                <ColumnDefinition Width="10*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Password" FontSize="35" FontWeight="DemiBold" Foreground="#FF4500" Grid.ColumnSpan="2" Margin="95,0,0,0"/>
+                            <PasswordBox HorizontalAlignment="Right" local:PasswordBoxAssistant.BindPassword="True" 
+                                         local:PasswordBoxAssistant.BoundPassword="{Binding LoginPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="40" Width="300" Background="White"  Margin="0,59,0,-45" FontSize="15" Grid.ColumnSpan="2" />
+                        </Grid>
+                        <Grid Grid.Row="3">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="10*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <!--<PasswordBox local:PasswordBoxAssistant.BindPassword="True" local:PasswordBoxAssistant.BoundPassword="{Binding LoginPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Background="White" FontSize="15" />-->
+                        </Grid>
+
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="1" FontWeight="DemiBold" FontSize="25" Foreground="White" Command="{Binding LogInCommand}" Content="Sign In">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+                                    </Style>
+                                </Button.Resources>
+
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="border" Background="#FF4500" BorderBrush="Gray" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4500"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                        </Grid>
+                        <Grid Grid.Row="7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="73*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="1"  Background="Gray" BorderThickness="0" BorderBrush="Black" ></Border>
+                        </Grid>
+
+                        <Grid Grid.Row="9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6*"></ColumnDefinition>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition  Height="2*" ></RowDefinition>
+                                    <RowDefinition  Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="1" FontSize="15">Don't have an account?</TextBlock>
+                            </Grid>
+                            <Button  Command="{Binding RegisterCommand}"  Grid.Column="1" Background="White" BorderBrush="Gray" Foreground="#FF4500" FontWeight="DemiBold" FontSize="25" Content="Register">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+                                    </Style>
+                                </Button.Resources>
+
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="border" Background="White" BorderBrush="Gray" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4500"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+
         </Grid>
+
+
+
     </Grid>
 </Page>

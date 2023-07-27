@@ -27,20 +27,29 @@ namespace TapAzImtahan
     {
         public TapAzAccount? LoggedAccount { get; set; }
 
-        
+
 
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
 
-    
-            LoginPageViewModel loginViewModel = new LoginPageViewModel();
-            LoggedAccount = loginViewModel.LoggedAccountLoginVM;
-            loginViewModel.MainFrame = LogFrame;
-            LoginPage loginPage = new LoginPage();
-            loginPage.DataContext = loginViewModel;
-            
-            LogFrame.NavigationService.Navigate(loginPage);
+                InitializeComponent();
+
+
+                LoginPageViewModel loginViewModel = new LoginPageViewModel();
+                LoggedAccount = loginViewModel.LoggedAccountLoginVM;
+                loginViewModel.MainFrame = LogFrame;
+                LoginPage loginPage = new LoginPage();
+                loginPage.DataContext = loginViewModel;
+
+                LogFrame.NavigationService.Navigate(loginPage);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
 

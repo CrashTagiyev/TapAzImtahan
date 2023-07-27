@@ -16,7 +16,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition ></RowDefinition>
-            <RowDefinition Height="370"></RowDefinition>
+            <RowDefinition Height="400"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid  Background="Red" Height="80" Grid.Row="0" VerticalAlignment="Top">
             <Grid.RowDefinitions>
@@ -71,32 +71,41 @@
             </ListView.ItemTemplate>
         </ListView>
         <Grid Grid.Row="1" Background="Azure">
-            <StackPanel Height="350" Width="300">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="61*"/>
+                <ColumnDefinition Width="19*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Height="650" Width="300" VerticalAlignment="Top" Margin="250,0,60,0">
                 <TextBlock Width="90" HorizontalAlignment="Left" Text="Category:" FontSize="20"/>
                 <ComboBox  SelectedItem="{Binding SelectedComboBoxItem}" ItemsSource="{Binding ProductCategories}"></ComboBox>
                 <Grid Height="275">
-                    <StackPanel x:Name="CarsRegister_SP">
-                        <TextBlock Text="Marka:"/>
-                        <ComboBox ItemsSource="{Binding CarMarkas,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCarMarka}" DisplayMemberPath="name"></ComboBox>
-                        <TextBlock Text="Model:"/>
-                        <ComboBox ItemsSource="{Binding SelectedCarMarka.models,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name"/>
-                        <TextBlock Text="Color:"/>
-                        <ComboBox  ItemsSource="{Binding Colors,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name"></ComboBox>
-                        <TextBlock Text="Salon:"/>
-                        <ComboBox ItemsSource="{Binding CarSalonCategory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="Motor:"/>
-                        <TextBox Text="{Binding NewCarProduct.Motor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="Image:"/>
-                        <TextBox Text="{Binding NewCarProduct.ImageUri, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button HorizontalAlignment="Right" Height="20" Width="80" Command="{Binding ImageFileDialogCommand}">Browse</Button>
-                        <TextBlock Text="Description:"/>
-                        <TextBox Height="50" Text="{Binding NewCarProduct.Description, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
+                    <ScrollViewer >
+                        <StackPanel x:Name="CarsRegister_SP" >
+                            <TextBlock Text="Marka:"/>
+                            <ComboBox ItemsSource="{Binding CarMarkas,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCarMarka}" DisplayMemberPath="name"></ComboBox>
+                            <TextBlock Text="Model:"/>
+                            <ComboBox ItemsSource="{Binding SelectedCarMarka.models,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding SelectedCarModelIndex}"  DisplayMemberPath="name"/>
+                            <TextBlock Text="Color:"/>
+                            <ComboBox  ItemsSource="{Binding Colors,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name" SelectedValue="{Binding SelectedColor}"></ComboBox>
+                            <TextBlock Text="Salon:"/>
+                            <ComboBox ItemsSource="{Binding CarSalonCategory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding NewCarProduct.Salon}"/>
+                            <TextBlock Text="Motor:"/>
+                            <TextBox Text="{Binding NewCarProduct.Motor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="Image:"/>
+                            <TextBox Text="{Binding SelectedImageUri, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            <Grid Height="50">
+                                <Image Source="{Binding SelectedImageUri}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <Button Height="20" Width="80" Command="{Binding ImageFileDialogCommand}" HorizontalAlignment="Right">Browse</Button>
+                            </Grid>
+                            <TextBlock Text="Description:"/>
+                            <TextBox Height="50" Text="{Binding NewCarProduct.Description, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
                 <Button Height="25" Content="Register New Product" FontSize="15" Command="{Binding AddCommand}"/>
 
             </StackPanel>
         </Grid>
     </Grid>
-       
+
 </Page>

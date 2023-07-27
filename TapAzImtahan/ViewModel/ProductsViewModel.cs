@@ -36,7 +36,7 @@ namespace TapAzImtahan.ViewModel
             AddCommand = new RelayCommand(AddProduct, CanAddProduct);
             OnlyCarsCommand = new RelayCommand(ShowOnlyCars);
             EveryProducCommand = new RelayCommand(ShowAllProducts);
-            ImageFileDialogCommand=new RelayCommand(ImageFileDialogExecute);
+            ImageFileDialogCommand = new RelayCommand(ImageFileDialogExecute);
         }
         public ICommand? ShowSelectedProductCommand { get; set; }
         public ICommand? AddCommand { get; set; }
@@ -52,15 +52,35 @@ namespace TapAzImtahan.ViewModel
         public ObservableCollection<Product> CurrentProducts { get => currentProducts; set { currentProducts = value; OnPropertyChanged(nameof(currentProducts)); } }
         public ObservableCollection<Product> TempProducts { get; set; }
         public ObservableCollection<string> ProductCategories { get; set; } = new ObservableCollection<string>() { "Car", "Electronic", "Pet" };
-        public ObservableCollection<string> CarSalonCategory { get; set; } = new ObservableCollection<string>() { "Koja", "Vlyur"};
+        public ObservableCollection<string> CarSalonCategory { get; set; } = new ObservableCollection<string>() { "Koja", "Vlyur" };
         public ObservableCollection<CarMarkaClass> CarMarkas { get => carMarkas; set { carMarkas = value; OnPropertyChanged(nameof(CarMarkas)); } }
-        public CarMarkaClass SelectedCarMarka { get => selectedCarMarka; set { selectedCarMarka = value; OnPropertyChanged(nameof(SelectedCarMarka)); } }
+        public CarMarkaClass SelectedCarMarka { get => selectedCarMarka; set { selectedCarMarka = value; newCarProduct.Make = selectedCarMarka.name; OnPropertyChanged(nameof(SelectedCarMarka)); } }
+
+        private int selectedCarModelIndex=-1;
+
+        public int SelectedCarModelIndex
+        {
+            get { return selectedCarModelIndex; }
+            set { selectedCarModelIndex = value; newCarProduct.Model = SelectedCarMarka?.models?[SelectedCarModelIndex].name; OnPropertyChanged(nameof(SelectedCarModelIndex)); }
+
+        }
+
+
         public ObservableCollection<ColorsJson> Colors { get => colors; set { colors = value; OnPropertyChanged(nameof(Colors)); } }
+
+        private ColorsJson selectedColor;
+
+        public ColorsJson SelectedColor
+        {
+            get { return selectedColor; }
+            set { selectedColor = value; newCarProduct.Color = SelectedColor.name; OnPropertyChanged(nameof(SelectedColor)); }
+        }
+
 
         private string? selectedImageUri;
         public string? SelectedImageUri
         {
-            get => SelectedImageUri;
+            get => selectedImageUri;
             set
             {
                 if (selectedImageUri != value)
@@ -71,10 +91,7 @@ namespace TapAzImtahan.ViewModel
             }
         }
 
-        private void OnComboBoxSelectionChanged(string? value)
-        {
-            MessageBox.Show(value);
-        }
+    
 
         private CarCategory? newCarProduct = new CarCategory();
 
@@ -97,7 +114,6 @@ namespace TapAzImtahan.ViewModel
                 {
                     selectedComboBoxItem = value;
                     OnPropertyChanged(nameof(SelectedComboBoxItem));
-                    OnComboBoxSelectionChanged(selectedComboBoxItem);
                 }
             }
         }
@@ -187,6 +203,7 @@ namespace TapAzImtahan.ViewModel
                 // For example, if you are displaying the image in an Image control:
                 // imageControl.Source = new BitmapImage(new Uri(selectedImagePath));
                 SelectedImageUri = selectedImagePath;
+                newCarProduct.ImageUri = selectedImageUri;
             }
         }
         public void AddProduct(object? parameter)
@@ -198,6 +215,7 @@ namespace TapAzImtahan.ViewModel
             if (selectedComboBoxItem != null && selectedComboBoxItem == "Car")
             {
                 Products.Add(new CarCategory(newCarProduct.Make, newCarProduct.Model, newCarProduct.Motor, newCarProduct.Color, newCarProduct.Salon, newCarProduct.Description, newCarProduct.ImageUri));
+                MessageBox.Show("New Product was successfully created");
             }
         }
         public bool CanAddProduct(object? parameter)

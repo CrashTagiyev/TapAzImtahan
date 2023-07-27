@@ -99,7 +99,7 @@ namespace TapAzImtahan.ViewModel
             }
         }
 
-        private Visibility? registerSPVisibility = Visibility.Hidden;
+        private Visibility? registerSPVisibility = Visibility.Visible;
 
         public Visibility? RegisterSPVisibility
         {
@@ -170,12 +170,11 @@ namespace TapAzImtahan.ViewModel
         {
             try
             {
-
                 for (int i = 0; i < Accounts.Count; i++)
                 {
                     if (Login == Accounts[i].Password && LoginPassword == Accounts[i].Password)
                     {
-                        loggedAccountLoginVM = Accounts[i];
+                        loggedAccountLoginVM = Accounts[0];
                         MainMenuViewModel = new MainMenuViewModel();
                         TapAzMM = new TapAzMainMenu();
                         MainMenuViewModel.LoggedTapAzAccount = loggedAccountLoginVM;
