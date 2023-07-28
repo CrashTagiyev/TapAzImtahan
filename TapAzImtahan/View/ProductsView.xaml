@@ -20,9 +20,9 @@
         </Grid.RowDefinitions>
         <StackPanel Background="#E0E0E0" Grid.Row="0">
 
-            <Grid Background="#E0E0E0" Height="70" Width="320">
+            <Grid Background="#E0E0E0" Height="70" Width="370">
                 <TextBox Style="{StaticResource HoverTextBoxStyle}" HorizontalAlignment="Left" FontSize="15" Width="320" Height="25" VerticalAlignment="Bottom"></TextBox>
-                <Button Template="{StaticResource Selection_button_style}"  Width="60" Height="25" VerticalAlignment="Bottom" Margin="0,0,70,0" Foreground="white">Search</Button>
+                <Button Template="{StaticResource Selection_button_style}" HorizontalAlignment="Right"  Width="60" Height="25" VerticalAlignment="Bottom"  Foreground="white">Search</Button>
             </Grid>
             <Grid  Background="#E0E0E0" Height="auto">
                 <Grid.RowDefinitions>
@@ -37,22 +37,20 @@
                     <Button Height="30" Width="140" Margin="10"  Command="{Binding EveryProducCommand}"  Template="{StaticResource Selection_button_style}" Foreground="White">All Products</Button>
                     <Border Background="White"   CornerRadius="6" BorderBrush="#FF4500" BorderThickness="2" Height="30" Width="140">
                         <Grid>
-                            <ComboBox  Height="25" Width="132" BorderThickness="0" >
-                                <ComboBoxItem>1</ComboBoxItem>
-                                <ComboBoxItem>1</ComboBoxItem>
-                                <ComboBoxItem>1</ComboBoxItem>
+                            <ComboBox  Height="25" Width="132" BorderThickness="0" ItemsSource="{Binding NewProductCategories}" SelectedItem="{Binding SelectedCategory}"  >
+                          
                             </ComboBox>
                         </Grid>
                     </Border>
-                    
+
                 </StackPanel>
             </Grid>
         </StackPanel>
-        
-        
-        <Grid  Grid.Row="1"  Background="#E0E0E0" Name="Products_Grid" Visibility="Visible">
+
+
+        <Grid  Grid.Row="1"  Background="#E0E0E0" Name="Products_Grid" Visibility="{Binding ProductManagementPanelVisibility}">
             <Border  Background="#E0E0E0"  >
-              
+
                 <StackPanel  Background="#E0E0E0"   >
                     <Button Content="Go back"  Width="100" Command="{Binding ShowSelectedProductCommand}" ></Button>
                     <Image Source="{Binding SelectedProduct.ImageUri}"></Image>
@@ -107,6 +105,8 @@
                             <ComboBox  ItemsSource="{Binding Colors,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name" SelectedValue="{Binding SelectedColor}"></ComboBox>
                             <TextBlock Text="Salon:"/>
                             <ComboBox ItemsSource="{Binding CarSalonCategory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding NewCarProduct.Salon}"/>
+                            <TextBlock Text="Price:"/>
+                            <TextBox Text="{Binding NewCarProduct.Price, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="Motor:"/>
                             <TextBox Text="{Binding NewCarProduct.Motor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="Image:"/>
@@ -122,6 +122,8 @@
                     <StackPanel  Visibility="{Binding OtherProductVisibility}">
                         <TextBlock Text="Name:"/>
                         <TextBox  Text="{Binding OtherNewProduct.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Price:"/>
+                        <TextBox  Text="{Binding OtherNewProduct.Price,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="Category:"/>
                         <ComboBox ItemsSource="{Binding NewProductCategories}" SelectedItem="{Binding OtherNewProduct.Category}"></ComboBox>
                         <TextBlock Text="Image:"/>

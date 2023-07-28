@@ -25,14 +25,15 @@ namespace TapAzImtahan.Model
         {
         }
 
-        public CarCategory(string? make, string? model, float? motor, string? color, string? salon, string? description, string? imageUri) : base(description, imageUri)
+        public CarCategory(string? make, string? model, float? motor, string? color, string? salon, float price,string? description, string? imageUri) : base(price,description, imageUri)
         {
             Make = make;
             Model = model;
+            Name = make + " " + model;
             Motor = motor;
             Color = color;
             Salon = salon;
-            Description += $"\nMarka:{Make}\n\nModel:{Model}\nMotor:{Motor}\nColor:{Color}\nSalon:{Salon}\n\n{Description}";
+            Description += $"\nMotor:{motor}\nColor:{color}\nSalon:{salon}\n\n{description}";
         }
         public string? Make { get => make; set { make = value; OnPropertyChanged(nameof(Make)); } }
         public string? Model { get; set; }

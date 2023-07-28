@@ -29,17 +29,6 @@ namespace TapAzImtahan.ViewModel
             set { loggedTapAzAccount = value; OnPropertyChanged(nameof(LoggedTapAzAccount)); }
         }
 
-        public void messageExecute(object? parameter)
-        {
-            //ProductsViewModel.Products.Add(new Product("salam", "Qaqaw"));
-            ProductsViewModel.TempProducts.Clear();
-            ProductsViewModel.TempProducts.Add(new Product("blblblb","qlqlql"));
-            ProductsViewModel.TempProducts.Add(new Product("blblblb","qlqlql"));
-            ProductsViewModel.TempProducts.Add(new Product("blblblb","qlqlql"));
-            ProductsViewModel.CurrentProducts=ProductsViewModel.TempProducts;
-
-        }
-        public RelayCommand ShowMessageCommand { get; set; }
 
         public ProductsViewModel? ProductVM { get => productVM; set { productVM = value; OnPropertyChanged(nameof(ProductVM)); } }
         public MainMenuViewModel()
@@ -47,7 +36,6 @@ namespace TapAzImtahan.ViewModel
             try
             {
                 ProductVM = new ProductsViewModel();
-                ShowMessageCommand = new RelayCommand(messageExecute);
                 ShowSelectedProductCommand = new RelayCommand(ShowButton);
 
                 currentPage = ProductVM;
@@ -76,7 +64,7 @@ namespace TapAzImtahan.ViewModel
         }
 
         public ICommand? ShowSelectedProductCommand { get; set; }
-        public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>() { new Product("Bmw", "teze", "Cars", "ImageUri") };
+        public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>() { new Product("Bmw",33333, "teze", "Cars", "ImageUri") };
 
         private Product? selectedProduct;
         private ProductsViewModel? productVM;

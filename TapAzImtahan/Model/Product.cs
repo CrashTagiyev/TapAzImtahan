@@ -17,17 +17,18 @@ namespace TapAzImtahan.Model
     public class Product : INotifyPropertyChanged
     {
         public Product() { }
-        public Product(string? name, string? description, string? category, string? imageUri)
+        public Product(string? name, float price, string? description, string? category, string? imageUri)
         {
             Name = name;
             Description = description;
             Category = category;
             ImageUri = imageUri;
         }
-        public Product(string? description, string? imageUri)
+        public Product(float price,string? description, string? imageUri)
         {
             Description = description;
             ImageUri = imageUri;
+            Price = price;
         }
         public Product(string? name, string? description, string? category, Image? image)
         {
@@ -47,6 +48,7 @@ namespace TapAzImtahan.Model
 
         public int Id { get; set; } = ++StaticID.SID;
         public string? Name { get; set; }
+        public float Price { get; set; }
         public string? Description { get; set; }
         public string? Category { get; set; }
         public string? ImageUri { get; set; } = null;
