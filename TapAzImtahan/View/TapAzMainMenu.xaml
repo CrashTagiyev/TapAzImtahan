@@ -19,9 +19,7 @@
             <RowDefinition ></RowDefinition>
             <RowDefinition Height="11.5*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0"  Background="OrangeRed">
-            <TextBlock TextAlignment="Center" Foreground="White" FontSize="28" Width="90" HorizontalAlignment="Left">Tap.az</TextBlock>
-        </Grid>
+  
             <Grid Grid.Row="1" Visibility="Visible" Background="Azure" >
                 <Frame Content="{Binding CurrentPage}"/>
             </Grid>

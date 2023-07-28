@@ -565,7 +565,7 @@
 
                         <Grid Grid.Row="9">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="6*"></ColumnDefinition>
+                                <ColumnDefinition Width="6.3*"></ColumnDefinition>
                                 <ColumnDefinition Width="7*"></ColumnDefinition>
                                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
@@ -575,7 +575,7 @@
                                     <RowDefinition  Height="2*" ></RowDefinition>
                                     <RowDefinition  Height="1*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="1" FontSize="15">Don't have an account?</TextBlock>
+                                <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="15">Don't have an account?</TextBlock>
                             </Grid>
                             <Button  Command="{Binding RegisterCommand}"  Grid.Column="1" Background="White" BorderBrush="Gray" Foreground="#FF4500" FontWeight="DemiBold" FontSize="25" Content="Register">
                                 <Button.Resources>

@@ -29,7 +29,7 @@ namespace TapAzImtahan.ViewModel
         public ProductsViewModel()
         {
             CurrentProducts = new ObservableCollection<Product>() { };
-            Products = new ObservableCollection<Product>() {new Product("onnan","bunnan") };
+            Products = new ObservableCollection<Product>() {new CarCategory("Mercedes" ,"S500" ,1500 ,"black" ,"Deri" ,"Ela masindi" , "C:\\Users\\Lenova\\Source\\Repos\\TapAzImtahannn\\TapAzImtahan\\Car Pistures\\indir (7).jpeg") };
             TempProducts = new ObservableCollection<Product>() { };
             carMarkas = new ObservableCollection<CarMarkaClass>();
             selectedCarMarka = new CarMarkaClass();

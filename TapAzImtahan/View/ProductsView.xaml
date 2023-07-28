@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <StackPanel Background="#E0E0E0" Grid.Row="0">
 
-            <Grid Background="#E0E0E0" Height="54">
+            <Grid Background="#E0E0E0" Height="70" Width="320">
                 <TextBox Style="{StaticResource HoverTextBoxStyle}" HorizontalAlignment="Left" FontSize="15" Width="320" Height="25" VerticalAlignment="Bottom"></TextBox>
                 <Button Template="{StaticResource Selection_button_style}"  Width="60" Height="25" VerticalAlignment="Bottom" Margin="0,0,70,0" Foreground="white">Search</Button>
             </Grid>
@@ -34,13 +34,25 @@
                     <Button Template="{StaticResource Selection_button_style}" Foreground="White" Height="20" Width="100"  HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding AddBewCommand}" >Add new</Button>
                 </Grid>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Button Height="50" Width="100" Margin="10"  Command="{Binding EveryProducCommand}"  Template="{StaticResource Selection_button_style}" Foreground="White">All Products</Button>
-                    <Button Height="50" Width="100" Margin="10" Command="{Binding OnlyCarsCommand}" Template="{StaticResource Selection_button_style}"  >Cars</Button>
+                    <Button Height="30" Width="140" Margin="10"  Command="{Binding EveryProducCommand}"  Template="{StaticResource Selection_button_style}" Foreground="White">All Products</Button>
+                    <Border Background="White"   CornerRadius="6" BorderBrush="#FF4500" BorderThickness="2" Height="30" Width="140">
+                        <Grid>
+                            <ComboBox  Height="25" Width="132" BorderThickness="0" >
+                                <ComboBoxItem>1</ComboBoxItem>
+                                <ComboBoxItem>1</ComboBoxItem>
+                                <ComboBoxItem>1</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <Grid  Grid.Row="1"  Background="#E0E0E0" Name="Products_Grid" Visibility="{Binding ProductManagementPanelVisibility}">
+        
+        
+        <Grid  Grid.Row="1"  Background="#E0E0E0" Name="Products_Grid" Visibility="Visible">
             <Border  Background="#E0E0E0"  >
+              
                 <StackPanel  Background="#E0E0E0"   >
                     <Button Content="Go back"  Width="100" Command="{Binding ShowSelectedProductCommand}" ></Button>
                     <Image Source="{Binding SelectedProduct.ImageUri}"></Image>
@@ -67,11 +79,10 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Height="100">
-                            <TextBlock Text="{Binding Name}" Height="25"></TextBlock>
-                            <TextBlock Width="0.00001" Height="0.00001" Text="{Binding Id}"></TextBlock>
-                            <TextBlock Text="{Binding Category}"></TextBlock>
-                            <TextBlock Text="{Binding Description}"></TextBlock>
+                        <StackPanel Background="White" Height="160" Width="188">
+                            <Image Height="100" Source="{Binding ImageUri}"></Image>
+                            <TextBlock Text="{Binding Make}" Width="189" Height="20"/>
+                            <TextBlock Text="{Binding Model}" Width="189" Height="75"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
