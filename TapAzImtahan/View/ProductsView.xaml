@@ -16,61 +16,68 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition ></RowDefinition>
-            <RowDefinition Height="400"></RowDefinition>
+            <RowDefinition Height="2.25*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid  Background="Red" Height="80" Grid.Row="0" VerticalAlignment="Top">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="3.0*"/>
-            </Grid.RowDefinitions>
-            <Grid>
-                <TextBlock Grid.Row="0"  Foreground="White" Width="70" HorizontalAlignment="Left" Height="20" FontSize="15">Categories</TextBlock>
-                <Button Height="20" Width="100"  HorizontalAlignment="Right" VerticalAlignment="Top" >add</Button>
-            </Grid>
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Button Height="50" Width="100" Margin="10" Command="{Binding EveryProducCommand}">All Products</Button>
-                <Button Height="50" Width="100" Margin="10" Command="{Binding OnlyCarsCommand}">Cars</Button>
-                <Button Height="50" Width="100" Margin="10" Command="{Binding AddCommand}">Electronics</Button>
-                <Button Height="50" Width="100" Margin="10" Command="{Binding AddCommand}">Pets</Button>
-            </StackPanel>
-        </Grid>
-        <Border Grid.Row="1">
-            <StackPanel Background="White" VerticalAlignment="Top">
-                <Button Content="Go back"  Width="100" Command="{Binding ShowSelectedProductCommand}" ></Button>
-                <Image Source="{Binding SelectedProduct.ImageUri}"></Image>
-                <TextBlock Text="{Binding SelectedProduct.Id}"/>
-                <TextBlock Text="{Binding SelectedProduct.Name}"/>
-                <TextBlock Text="{Binding SelectedProduct.Description}"/>
-                <TextBlock Text="{Binding SelectedProduct.Category}"/>
-            </StackPanel>
-        </Border>
-        <ListView Grid.Row="1" Height="360" VerticalAlignment="Top"  ItemsSource="{Binding CurrentProducts}" SelectedItem="{Binding SelectedProduct}" Visibility="{Binding ProductLWvisibility}" IsHitTestVisible="{Binding IsEnable}">
-            <ListView.ItemContainerStyle >
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Width" Value="220"></Setter>
-                    <Setter Property="Height" Value="220"></Setter>
-                    <Setter Property="Margin" Value="10"></Setter>
-                    <Setter Property="ScrollViewer.AllowDrop" Value="False"></Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
+        <StackPanel Grid.Row="0">
 
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Height="100">
-                        <TextBlock Text="{Binding Name}" Height="25"></TextBlock>
-                        <TextBlock Width="0.00001" Height="0.00001" Text="{Binding Id}"></TextBlock>
-                        <TextBlock Text="{Binding Category}"></TextBlock>
-                        <TextBlock Text="{Binding Description}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Grid Grid.Row="1" Background="Azure">
+            <Grid Background="White" Height="54">
+                <TextBox Style="{StaticResource HoverTextBoxStyle}" HorizontalAlignment="Left" FontSize="15" Width="320" Height="25" VerticalAlignment="Bottom"></TextBox>
+                <Button Template="{StaticResource Selection_button_style}"  Width="60" Height="25" VerticalAlignment="Bottom" Margin="0,0,70,0" Foreground="white">Search</Button>
+            </Grid>
+            <Grid  Background="Azure" Height="auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="3.0*"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <TextBlock Grid.Row="0"  Foreground="White" Width="70" HorizontalAlignment="Left" Height="20" FontSize="15">Categories</TextBlock>
+                    <Button Template="{StaticResource Selection_button_style}" Foreground="White" Height="20" Width="100"  HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding AddBewCommand}" >Add new</Button>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button Height="50" Width="100" Margin="10" Command="{Binding EveryProducCommand}" Template="{StaticResource Selection_button_style}" Foreground="White">All Products</Button>
+                    <Button Height="50" Width="100" Margin="10" Command="{Binding OnlyCarsCommand}" Template="{StaticResource Selection_button_style}"  >Cars</Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="1" Background="Azure" Name="Products_Grid" Visibility="{Binding ProductManagementPanelVisibility}">
+            <Border  >
+                <StackPanel Background="White" >
+                    <Button Content="Go back"  Width="100" Command="{Binding ShowSelectedProductCommand}" ></Button>
+                    <Image Source="{Binding SelectedProduct.ImageUri}"></Image>
+                    <TextBlock Text="{Binding SelectedProduct.Id}"/>
+                    <TextBlock Text="{Binding SelectedProduct.Name}"/>
+                    <TextBlock Text="{Binding SelectedProduct.Description}"/>
+                    <TextBlock Text="{Binding SelectedProduct.Category}"/>
+                </StackPanel>
+            </Border>
+            <ListView  Height="360" VerticalAlignment="Top" VerticalContentAlignment="Top"  ItemsSource="{Binding CurrentProducts,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedProduct}" Visibility="{Binding ProductLWvisibility}" IsHitTestVisible="{Binding IsEnable}">
+                <ListView.ItemContainerStyle >
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Width" Value="220"></Setter>
+                        <Setter Property="Height" Value="220"></Setter>
+                        <Setter Property="Margin" Value="10"></Setter>
+                        <Setter Property="ScrollViewer.AllowDrop" Value="False"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Height="100">
+                            <TextBlock Text="{Binding Name}" Height="25"></TextBlock>
+                            <TextBlock Width="0.00001" Height="0.00001" Text="{Binding Id}"></TextBlock>
+                            <TextBlock Text="{Binding Category}"></TextBlock>
+                            <TextBlock Text="{Binding Description}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="1" Background="Azure" Visibility="{Binding ProductCreationPanelVisibility}" Name="New_Product_Creation_Grid" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="61*"/>
                 <ColumnDefinition Width="19*"/>
@@ -79,8 +86,8 @@
                 <TextBlock Width="90" HorizontalAlignment="Left" Text="Category:" FontSize="20"/>
                 <ComboBox  SelectedItem="{Binding SelectedComboBoxItem}" ItemsSource="{Binding ProductCategories}"></ComboBox>
                 <Grid Height="275">
-                    <ScrollViewer >
-                        <StackPanel x:Name="CarsRegister_SP" >
+                    <ScrollViewer  Visibility="{Binding CarProductCreateSelectionVisibility}">
+                        <StackPanel x:Name="CarsRegister_SP"  >
                             <TextBlock Text="Marka:"/>
                             <ComboBox ItemsSource="{Binding CarMarkas,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCarMarka}" DisplayMemberPath="name"></ComboBox>
                             <TextBlock Text="Model:"/>
@@ -101,8 +108,23 @@
                             <TextBox Height="50" Text="{Binding NewCarProduct.Description, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </ScrollViewer>
+                    <StackPanel  Visibility="{Binding OtherProductVisibility}">
+                        <TextBlock Text="Name:"/>
+                        <TextBox  Text="{Binding OtherNewProduct.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Category:"/>
+                        <ComboBox ItemsSource="{Binding NewProductCategories}" SelectedItem="{Binding OtherNewProduct.Category}"></ComboBox>
+                        <TextBlock Text="Image:"/>
+                        <TextBox Text="{Binding OtherNewProduct.ImageUri, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <Grid Height="35">
+                            <Image Source="{Binding SelectedImageUri}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Button Height="20" Width="80" Command="{Binding ImageFileDialogCommand}" HorizontalAlignment="Right">Browse</Button>
+                        </Grid>
+                        <TextBlock Text="Description:"/>
+                        <TextBox Height="50" Text="{Binding OtherNewProduct.Description, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
                 </Grid>
                 <Button Height="25" Content="Register New Product" FontSize="15" Command="{Binding AddCommand}"/>
+                <Button Height="25" Content="Back" FontSize="15" Command="{Binding BackToMainMenuCommand}"/>
 
             </StackPanel>
         </Grid>

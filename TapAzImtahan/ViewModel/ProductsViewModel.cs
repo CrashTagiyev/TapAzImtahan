@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -22,13 +23,17 @@ namespace TapAzImtahan.ViewModel
 {
     public class ProductsViewModel : INotifyPropertyChanged
     {
+        public  void message()
+        {
+        }
         public ProductsViewModel()
         {
             CurrentProducts = new ObservableCollection<Product>() { };
-            Products = new ObservableCollection<Product>() { };
+            Products = new ObservableCollection<Product>() {new Product("onnan","bunnan") };
             TempProducts = new ObservableCollection<Product>() { };
             carMarkas = new ObservableCollection<CarMarkaClass>();
             selectedCarMarka = new CarMarkaClass();
+            OtherNewProduct = new Product();
             FillCardMarkaModels();
             FillColors();
             CurrentProducts = Products;
@@ -37,8 +42,11 @@ namespace TapAzImtahan.ViewModel
             OnlyCarsCommand = new RelayCommand(ShowOnlyCars);
             EveryProducCommand = new RelayCommand(ShowAllProducts);
             ImageFileDialogCommand = new RelayCommand(ImageFileDialogExecute);
+            AddBewCommand = new RelayCommand(OpenCreationPanel);
+            BackToMainMenuCommand = new RelayCommand(BackTOMainMenu);
         }
         public ICommand? ShowSelectedProductCommand { get; set; }
+        public ICommand? BackToMainMenuCommand { get; set; }
         public ICommand? AddCommand { get; set; }
         public ICommand? EveryProducCommand { get; set; }
         public ICommand? OnlyCarsCommand { get; set; }
@@ -46,17 +54,20 @@ namespace TapAzImtahan.ViewModel
         public ICommand? OnlyPetsCommand { get; set; }
         public ICommand? ImageFileDialogCommand { get; set; }
         public ICommand? RegisterProductCommand { get; set; }
+        public ICommand? AddBewCommand { get; set; }
         public ICommand ComboBoxSelectionChangedCommand { get; set; }
 
-        public ObservableCollection<Product> Products { get; set; }
-        public ObservableCollection<Product> CurrentProducts { get => currentProducts; set { currentProducts = value; OnPropertyChanged(nameof(currentProducts)); } }
-        public ObservableCollection<Product> TempProducts { get; set; }
-        public ObservableCollection<string> ProductCategories { get; set; } = new ObservableCollection<string>() { "Car", "Electronic", "Pet" };
+        public static ObservableCollection<Product> Products { get; set; }
+        public static ObservableCollection<Product> CurrentProducts { get; set; }
+        public static ObservableCollection<Product> TempProducts { get; set; }
+        public ObservableCollection<string> ProductCategories { get; set; } = new ObservableCollection<string>() { "Car", "Other" };
         public ObservableCollection<string> CarSalonCategory { get; set; } = new ObservableCollection<string>() { "Koja", "Vlyur" };
         public ObservableCollection<CarMarkaClass> CarMarkas { get => carMarkas; set { carMarkas = value; OnPropertyChanged(nameof(CarMarkas)); } }
         public CarMarkaClass SelectedCarMarka { get => selectedCarMarka; set { selectedCarMarka = value; newCarProduct.Make = selectedCarMarka.name; OnPropertyChanged(nameof(SelectedCarMarka)); } }
 
-        private int selectedCarModelIndex=-1;
+        public ObservableCollection<string> NewProductCategories { get; set; } = new ObservableCollection<string>() { "Pet", "Electronics", "Home", "Work" };
+
+        private int selectedCarModelIndex = -1;
 
         public int SelectedCarModelIndex
         {
@@ -75,6 +86,13 @@ namespace TapAzImtahan.ViewModel
             get { return selectedColor; }
             set { selectedColor = value; newCarProduct.Color = SelectedColor.name; OnPropertyChanged(nameof(SelectedColor)); }
         }
+        private Product otherNewProduct;
+
+        public Product OtherNewProduct
+        {
+            get { return otherNewProduct; }
+            set { otherNewProduct = value; OnPropertyChanged(nameof(OtherNewProduct)); }
+        }
 
 
         private string? selectedImageUri;
@@ -91,7 +109,7 @@ namespace TapAzImtahan.ViewModel
             }
         }
 
-    
+
 
         private CarCategory? newCarProduct = new CarCategory();
 
@@ -114,9 +132,28 @@ namespace TapAzImtahan.ViewModel
                 {
                     selectedComboBoxItem = value;
                     OnPropertyChanged(nameof(SelectedComboBoxItem));
+                    OnSelectionChanged(value);
                 }
             }
         }
+
+        public void OnSelectionChanged(string? value)
+        {
+            if (value == "Car")
+            {
+
+                OtherProductVisibility = Visibility.Hidden;
+                CarProductCreateSelectionVisibility = Visibility.Visible;
+            }
+
+            if (value == "Other")
+            {
+                CarProductCreateSelectionVisibility = Visibility.Hidden;
+                OtherProductVisibility = Visibility.Visible;
+            }
+        }
+
+
         private Product? selectedProduct;
 
         public Product? SelectedProduct
@@ -132,17 +169,41 @@ namespace TapAzImtahan.ViewModel
                 }
             }
         }
+        private Visibility? carProductCreateSelectionVisibility = Visibility.Hidden;
+        public Visibility? CarProductCreateSelectionVisibility
+        {
+            get { return carProductCreateSelectionVisibility; }
+            set { carProductCreateSelectionVisibility = value; OnPropertyChanged(nameof(CarProductCreateSelectionVisibility)); }
+        }
 
+        private Visibility? otherProductVisibility = Visibility.Hidden;
+        public Visibility? OtherProductVisibility
+        {
+            get { return otherProductVisibility; }
+            set { otherProductVisibility = value; OnPropertyChanged(nameof(OtherProductVisibility)); }
+        }
 
-        private Visibility? productLWvisibility = Visibility.Hidden;
+        private Visibility? productLWvisibility = Visibility.Visible;
         public Visibility? ProductLWvisibility
         {
             get { return productLWvisibility; }
             set { productLWvisibility = value; OnPropertyChanged(nameof(ProductLWvisibility)); }
         }
 
+        private Visibility? productCreationPanelVisibility = Visibility.Hidden;
+        public Visibility? ProductCreationPanelVisibility
+        {
+            get { return productCreationPanelVisibility; }
+            set { productCreationPanelVisibility = value; OnPropertyChanged(nameof(ProductCreationPanelVisibility)); }
+        }
+        private Visibility? productManagementPanelVisibility = Visibility.Visible;
+        public Visibility? ProductManagementPanelVisibility
+        {
+            get { return productManagementPanelVisibility; }
+            set { productManagementPanelVisibility = value; OnPropertyChanged(nameof(ProductManagementPanelVisibility)); }
+        }
 
-        private Visibility? selectedProductLWvisibility = Visibility.Hidden;
+        private Visibility? selectedProductLWvisibility = Visibility.Visible;
         public Visibility? SelectedProductLWvisibility
         {
             get { return selectedProductLWvisibility; }
@@ -206,23 +267,44 @@ namespace TapAzImtahan.ViewModel
                 newCarProduct.ImageUri = selectedImageUri;
             }
         }
+        public void OpenCreationPanel(object? parameter)
+        {
+            productManagementPanelVisibility= Visibility.Hidden;
+            ProductCreationPanelVisibility = Visibility.Visible;
+
+        }
+        public void BackTOMainMenu(object? parameter)
+        {
+            ProductCreationPanelVisibility= Visibility.Hidden;
+            ProductManagementPanelVisibility = Visibility.Visible;
+        }
         public void AddProduct(object? parameter)
         {
-            if (NewCarProduct.Make == null)
-            {
-                MessageBox.Show(NewCarProduct.Make);
-            }
+
             if (selectedComboBoxItem != null && selectedComboBoxItem == "Car")
             {
                 Products.Add(new CarCategory(newCarProduct.Make, newCarProduct.Model, newCarProduct.Motor, newCarProduct.Color, newCarProduct.Salon, newCarProduct.Description, newCarProduct.ImageUri));
-                MessageBox.Show("New Product was successfully created");
+                MessageBox.Show("New Car Product was successfully created");
             }
+            else if (selectedComboBoxItem != null && selectedComboBoxItem == "Car")
+            {
+                Products.Add(new Product(OtherNewProduct.Name, OtherNewProduct.Description, OtherNewProduct.Category, OtherNewProduct.ImageUri));
+            }
+
         }
         public bool CanAddProduct(object? parameter)
         {
             if (selectedComboBoxItem == "Car")
             {
                 if (NewCarProduct.Make != null && NewCarProduct.Model != null && NewCarProduct.Motor != null && NewCarProduct.Color != null && NewCarProduct.Salon != null && NewCarProduct.Description != null && NewCarProduct.ImageUri != null)
+                {
+                    return true;
+                }
+            }
+            else if (SelectedComboBoxItem == "Other")
+
+            {
+                if (OtherNewProduct.Name != null && OtherNewProduct.Description != null && OtherNewProduct.ImageUri != null)
                 {
                     return true;
                 }

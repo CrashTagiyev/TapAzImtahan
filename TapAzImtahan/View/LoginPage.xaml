@@ -496,7 +496,7 @@
                                 <ColumnDefinition Width="10*"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBox  Text="{Binding Login}" Style="{StaticResource HoverTextBoxStyle}"  Grid.Column="1">
+                            <TextBox  Text="{Binding Login}" Style="{StaticResource HoverTextBoxStyle}"  Grid.Column="1" FontSize="35" VerticalContentAlignment="Center">
                                 <TextBox.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="4"/>
@@ -515,7 +515,7 @@
                             <TextBlock Text="Password" FontSize="35" FontWeight="DemiBold" Foreground="#FF4500" Grid.ColumnSpan="2" Margin="95,0,0,0"/>
                             <PasswordBox HorizontalAlignment="Right" local:PasswordBoxAssistant.BindPassword="True" 
                                          local:PasswordBoxAssistant.BoundPassword="{Binding LoginPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         Height="40" Width="300" Background="White"  Margin="0,59,0,-45" FontSize="15" Grid.ColumnSpan="2" />
+                                         Height="60" Width="300" Background="White"  Margin="0,59,0,-45" FontSize="35" Grid.ColumnSpan="2" />
                         </Grid>
                         <Grid Grid.Row="3">
 
