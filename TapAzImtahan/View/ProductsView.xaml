@@ -18,30 +18,30 @@
             <RowDefinition ></RowDefinition>
             <RowDefinition Height="2.25*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
+        <StackPanel Background="#E0E0E0" Grid.Row="0">
 
-            <Grid Background="White" Height="54">
+            <Grid Background="#E0E0E0" Height="54">
                 <TextBox Style="{StaticResource HoverTextBoxStyle}" HorizontalAlignment="Left" FontSize="15" Width="320" Height="25" VerticalAlignment="Bottom"></TextBox>
                 <Button Template="{StaticResource Selection_button_style}"  Width="60" Height="25" VerticalAlignment="Bottom" Margin="0,0,70,0" Foreground="white">Search</Button>
             </Grid>
-            <Grid  Background="Azure" Height="auto">
+            <Grid  Background="#E0E0E0" Height="auto">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="3.0*"/>
                 </Grid.RowDefinitions>
-                <Grid>
+                <Grid   Background="#E0E0E0">
                     <TextBlock Grid.Row="0"  Foreground="White" Width="70" HorizontalAlignment="Left" Height="20" FontSize="15">Categories</TextBlock>
                     <Button Template="{StaticResource Selection_button_style}" Foreground="White" Height="20" Width="100"  HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding AddBewCommand}" >Add new</Button>
                 </Grid>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Button Height="50" Width="100" Margin="10" Command="{Binding EveryProducCommand}" Template="{StaticResource Selection_button_style}" Foreground="White">All Products</Button>
+                    <Button Height="50" Width="100" Margin="10"  Command="{Binding EveryProducCommand}"  Template="{StaticResource Selection_button_style}" Foreground="White">All Products</Button>
                     <Button Height="50" Width="100" Margin="10" Command="{Binding OnlyCarsCommand}" Template="{StaticResource Selection_button_style}"  >Cars</Button>
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <Grid Grid.Row="1" Background="Azure" Name="Products_Grid" Visibility="{Binding ProductManagementPanelVisibility}">
-            <Border  >
-                <StackPanel Background="White" >
+        <Grid  Grid.Row="1"  Background="#E0E0E0" Name="Products_Grid" Visibility="{Binding ProductManagementPanelVisibility}">
+            <Border  Background="#E0E0E0"  >
+                <StackPanel  Background="#E0E0E0"   >
                     <Button Content="Go back"  Width="100" Command="{Binding ShowSelectedProductCommand}" ></Button>
                     <Image Source="{Binding SelectedProduct.ImageUri}"></Image>
                     <TextBlock Text="{Binding SelectedProduct.Id}"/>
@@ -50,7 +50,7 @@
                     <TextBlock Text="{Binding SelectedProduct.Category}"/>
                 </StackPanel>
             </Border>
-            <ListView  Height="360" VerticalAlignment="Top" VerticalContentAlignment="Top"  ItemsSource="{Binding CurrentProducts,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedProduct}" Visibility="{Binding ProductLWvisibility}" IsHitTestVisible="{Binding IsEnable}">
+            <ListView  Background="#E0E0E0"  Height="360" VerticalAlignment="Top" VerticalContentAlignment="Top"  ItemsSource="{Binding CurrentProducts,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedProduct}" Visibility="{Binding ProductLWvisibility}" IsHitTestVisible="{Binding IsEnable}">
                 <ListView.ItemContainerStyle >
                     <Style TargetType="ListViewItem">
                         <Setter Property="Width" Value="220"></Setter>

@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:TapAzImtahan"
              xmlns:viewModel="clr-namespace:TapAzImtahan.ViewModel"
              xmlns:view="clr-namespace:TapAzImtahan.View"
-             StartupUri="View/MainWindow.xaml">
+             StartupUri="View/ProductsView.xaml">
     <Application.Resources>
         <Style x:Key="Login_TextBlock_Stytle" TargetType="TextBlock">
             <Setter Property="Width" Value="100"/>
@@ -15,6 +15,10 @@
             <Setter Property="HorizontalAlignment" Value="Right"></Setter>
         </Style>
 
+        <Style x:Key="RoundedBorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+
         <DataTemplate DataType="{x:Type viewModel:MainMenuViewModel}">
             <view:TapAzMainMenu/>
         </DataTemplate>
@@ -23,17 +27,25 @@
         </DataTemplate>
 
         <ControlTemplate x:Key="Selection_button_style" TargetType="Button">
-            <Border x:Name="border" Background="#FF4500" BorderBrush="Gray" BorderThickness="1">
+
+
+            <Border x:Name="border" Background="#FF4500" CornerRadius="6" BorderBrush="Gray" BorderThickness="1">
                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                
             </Border>
+
+
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter TargetName="border" Property="BorderBrush" Value="#FF4500"/>
                 </Trigger>
             </ControlTemplate.Triggers>
+
+
         </ControlTemplate>
-        
+
+
+
+
         <Style x:Key="HoverTextBoxStyle" TargetType="TextBox">
             <Setter Property="Template">
                 <Setter.Value>
@@ -54,6 +66,6 @@
             </Setter>
         </Style>
 
-        
+
     </Application.Resources>
 </Application>
