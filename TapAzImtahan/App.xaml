@@ -43,6 +43,41 @@
 
         </ControlTemplate>
 
+
+        <ControlTemplate x:Key="Selection_button3_style" TargetType="Button">
+
+
+            <Border x:Name="border" Background="White" CornerRadius="6" BorderBrush="#FF4500" BorderThickness="1">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="border" Property="BorderBrush" Value="#FF4500"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+
+
+        </ControlTemplate>
+
+
+        <ControlTemplate x:Key="Selection_button2_style" TargetType="Button">
+
+
+            <Border x:Name="border" Background="#80FF00" CornerRadius="6" BorderBrush="Gray" BorderThickness="1">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="border" Property="BorderBrush" Value="#FF4500"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+
+
+        </ControlTemplate>
         <ControlTemplate x:Key="Selection_combobox_style" TargetType="ComboBox">
 
 
@@ -58,10 +93,11 @@
 
 
         <Style x:Key="HoverTextBoxStyle" TargetType="TextBox">
+            
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border x:Name="border" Background="Transparent" BorderBrush="Gray" BorderThickness="1">
+                        <Border x:Name="border" Background="Transparent" CornerRadius="6" BorderBrush="Gray" BorderThickness="0">
                             <ScrollViewer x:Name="PART_ContentHost"/>
                         </Border>
                         <ControlTemplate.Triggers>

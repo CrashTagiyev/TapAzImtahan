@@ -16,32 +16,70 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition ></RowDefinition>
-            <RowDefinition Height="2.25*"></RowDefinition>
+            <RowDefinition Height="1.8*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Background="#E0E0E0" Grid.Row="0">
 
-            <Grid Background="#E0E0E0" Height="70" Width="370">
-                <TextBox Text="{Binding SearchedString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource HoverTextBoxStyle}" HorizontalAlignment="Left" FontSize="15" Width="320" Height="25" VerticalAlignment="Bottom"></TextBox>
-                <Button Command="{Binding SearchCommand}" Template="{StaticResource Selection_button_style}" HorizontalAlignment="Right"  Width="60" Height="25" VerticalAlignment="Bottom"  Foreground="white">Search</Button>
-            </Grid>
-            <Grid  Background="#E0E0E0" Height="auto">
+            <Grid Background="#E0E0E0" Height="90" Width="800">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="3.0*"/>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid   Background="#E0E0E0">
-                    <TextBlock Grid.Row="0"  Foreground="White" Width="70" HorizontalAlignment="Left" Height="20" FontSize="15">Categories</TextBlock>
-                    <Button Template="{StaticResource Selection_button_style}" Foreground="White" Height="20" Width="100"  HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding AddBewCommand}" >Add new</Button>
+                <Grid Grid.Row="0">
+                    <TextBlock Foreground="Gray" Text="Turbo.az   Boss.az   Bina.az" Margin="170,0,485,0"></TextBlock>
+                    <TextBlock Foreground="Black" Text="Destek:(012)555-55-55" Margin="425,-1,255,1"></TextBlock>
+                    <TextBlock Foreground="Gray" Text="Yardim  RU  Secilmisler" Margin="550,0,105,0"></TextBlock>
+
+
                 </Grid>
+                <Grid Background="#FF4500" Grid.Row="1">
+                    <TextBlock Margin="175,16,380,5" Text="tap.az" FontSize="27" Foreground="White" FontWeight="DemiBold"></TextBlock>
+                    <Button Template="{StaticResource Selection_button2_style}" Foreground="White" FontWeight="DemiBold" Height="35" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding AddBewCommand}" Margin="675,0,0,0" >Add new</Button>
+                    <Border Background="#E0E0E0" CornerRadius="6" BorderThickness="0" BorderBrush="Gray"  Margin="285,20,150,20"></Border>
+                    <Button Command="{Binding SearchCommand}" FontWeight="DemiBold" Template="{StaticResource Selection_button_style}" HorizontalAlignment="Left"  Width="60" Height="25" VerticalAlignment="Center"  Foreground="white" Margin="585,0,0,0" RenderTransformOrigin="0.5,2.2">Search</Button>
+                    <TextBox   Text="{Binding SearchedString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource HoverTextBoxStyle}" HorizontalAlignment="Left" FontSize="15" Width="305" Height="35" VerticalAlignment="Center" Margin="285,0,0,0"></TextBox>
+
+                </Grid>
+            </Grid>
+
+            <Grid  Background="#E0E0E0" Height="70">
+
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Button Height="30" Width="140" Margin="10"  Command="{Binding EveryProducCommand}"  Template="{StaticResource Selection_button_style}" Foreground="White">All Products</Button>
-                    <Border Background="White"   CornerRadius="6" BorderBrush="#FF4500" BorderThickness="2" Height="30" Width="140">
+                    <Button  Height="50" Width="105" Margin="10" FontWeight="DemiBold"  Command="{Binding EveryProducCommand}"  Template="{StaticResource Selection_button_style}" Foreground="White">All Products</Button>
+                    <Button  Template="{StaticResource Selection_button3_style}" Margin="8" Height="53" Width="65">
                         <Grid>
-                            <ComboBox  Height="25" Width="132" BorderThickness="0" ItemsSource="{Binding NewProductCategories}" SelectedItem="{Binding SelectedCategory}"  >
-                          
+                            <Image Source="C:\Users\Lenova\Source\Repos\TapAzImtahanas\TapAzImtahan\Car Pistures\images (1).jpeg" Margin="6,-15,0,-9"></Image>
+                        </Grid>
+                    </Button>
+                    <Button Template="{StaticResource Selection_button3_style}" Margin="8" Height="53" Width="65">
+                        <Grid>
+                            <Image Source="C:\Users\Lenova\Source\Repos\TapAzImtahanas\TapAzImtahan\Car Pistures\indir (9).jpeg" Margin="0,0,3,5"></Image>
+                        </Grid>
+                    </Button>
+                    <Button Template="{StaticResource Selection_button3_style}" Margin="8" Height="53" Width="65">
+                        <Grid>
+                            <Image Source="C:\Users\Lenova\Source\Repos\TapAzImtahanas\TapAzImtahan\Car Pistures\indir (8).jpeg" Margin="1,4,0,1" RenderTransformOrigin="0.457,0.424"></Image>
+                        </Grid>
+                    </Button>
+                    <Button Template="{StaticResource Selection_button3_style}" Margin="8" Height="53" Width="65">
+                        <Grid>
+                            <Image Source="C:\Users\Lenova\Source\Repos\TapAzImtahanas\TapAzImtahan\Car Pistures\indir (10).jpeg" Margin="6,4,5,1"></Image>
+                        </Grid>
+                    </Button>
+                    <Button Template="{StaticResource Selection_button3_style}" Margin="8" Height="53" Width="65">
+                        <Grid>
+                            <Image Source="C:\Users\Lenova\Source\Repos\TapAzImtahanas\TapAzImtahan\Car Pistures\images (2).jpeg" Margin="-10,0,-8,1"></Image>
+                        </Grid>
+                    </Button>
+
+
+                    <!--<Border Background="#E0E0E0"   CornerRadius="6" BorderBrush="#FF4500" BorderThickness="2" Height="30" Width="140">
+                        <Grid>
+                            <ComboBox FontWeight="DemiBold" Height="25" Width="132" BorderThickness="0" ItemsSource="{Binding NewProductCategories}" SelectedItem="{Binding SelectedCategory}"  >
+
                             </ComboBox>
                         </Grid>
-                    </Border>
+                    </Border>-->
 
                 </StackPanel>
             </Grid>
@@ -77,11 +115,21 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Background="White" Width="255" Height="250" Margin="-10">
-                            <Image Height="100" Source="{Binding ImageUri}"></Image>
-                            <TextBlock Text="{Binding Make}" Width="189" Height="20"/>
-                            <TextBlock Text="{Binding Model}" Width="189" Height="75"/>
-                        </StackPanel>
+                        <Border Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#FF4500" Height="207">
+
+                            <StackPanel Background="White"  Margin="10">
+                                <Border BorderBrush="Black" BorderThickness="0" Width="172" Height="116">
+                                    <Grid>
+
+                                        <Image Stretch="UniformToFill" Source="{Binding ImageUri}" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                                
+                                <TextBlock Margin="-80,0,0,0" Text="{Binding Price}" FontSize="25"  FontWeight="DemiBold"   Width="111" Height="32"/>
+                                <TextBlock Margin="100,-33,0,0" Text="AZN" FontSize="25"  FontWeight="DemiBold"   Width="111" Height="32"/>
+                                <TextBlock Margin="-20,0,0,0" Text="{Binding Name}" FontSize="25"  FontWeight ="ExtraLight"   Width="168" Height="32"/>
+                            </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -127,7 +175,7 @@
                         <TextBlock Text="Category:"/>
                         <ComboBox ItemsSource="{Binding NewProductCategories}" SelectedItem="{Binding OtherNewProduct.Category}"></ComboBox>
                         <TextBlock Text="Image:"/>
-                        <TextBox Text="{Binding OtherNewProduct.ImageUri, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding SelectedImageUri , Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         <Grid Height="35">
                             <Image Source="{Binding SelectedImageUri}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <Button Height="20" Width="80" Command="{Binding ImageFileDialogCommand}" HorizontalAlignment="Right">Browse</Button>

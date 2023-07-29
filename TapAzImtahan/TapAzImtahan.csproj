@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Car Pistures\images %281%29.jpeg" />
+    <None Remove="Car Pistures\images %282%29.jpeg" />
     <None Remove="JsonFiles\cars.json" />
     <None Remove="JsonFiles\colors.json" />
   </ItemGroup>
@@ -19,6 +21,10 @@
   <ItemGroup>
     <EmbeddedResource Include="JsonFiles\cars.json" />
     <EmbeddedResource Include="JsonFiles\colors.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Car Pistures\images (2).jpeg" />
   </ItemGroup>
 
 </Project>

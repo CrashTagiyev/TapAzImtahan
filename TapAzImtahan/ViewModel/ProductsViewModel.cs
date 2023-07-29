@@ -28,7 +28,7 @@ namespace TapAzImtahan.ViewModel
         public ProductsViewModel()
         {
             CurrentProducts = new ObservableCollection<Product>() { };
-            Products = new ObservableCollection<Product>() { new CarCategory("Mercedes", "S500", 1500, "black", "Deri", 33333, "Ela masindi", "C:\\Users\\Crash\\Desktop\\bmw-m8-competition-gran-coupe-modelfinder.png.asset.1643111901255.png") };
+            Products = new ObservableCollection<Product>() { new CarCategory("Mercedes", "S500", 1500, "black", "Deri", 150000, "Ela masindi", "C:\\Users\\Lenova\\Source\\Repos\\TapAzImtahanas\\TapAzImtahan\\Car Pistures\\indir (7).jpeg") };
             TempProducts = new ObservableCollection<Product>() { };
             carMarkas = new ObservableCollection<CarMarkaClass>();
             selectedCarMarka = new CarMarkaClass();
@@ -40,7 +40,9 @@ namespace TapAzImtahan.ViewModel
             AddCommand = new RelayCommand(AddProduct, CanAddProduct);
             OnlyCarsCommand = new RelayCommand(ShowOnlyCars);
             EveryProducCommand = new RelayCommand(ShowAllProducts);
+
             ImageFileDialogCommand = new RelayCommand(ImageFileDialogExecute);
+
             AddBewCommand = new RelayCommand(OpenCreationPanel);
             BackToMainMenuCommand = new RelayCommand(BackTOMainMenu);
             SearchCommand = new RelayCommand(SearchExecute, canSearch);
@@ -325,6 +327,7 @@ namespace TapAzImtahan.ViewModel
                 // imageControl.Source = new BitmapImage(new Uri(selectedImagePath));
                 SelectedImageUri = selectedImagePath;
                 newCarProduct.ImageUri = selectedImageUri;
+                otherNewProduct.ImageUri = selectedImageUri;    
             }
         }
         public void OpenCreationPanel(object? parameter)
