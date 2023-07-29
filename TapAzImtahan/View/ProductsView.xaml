@@ -89,14 +89,18 @@
         <Grid  Grid.Row="1"  Background="#E0E0E0" Name="Products_Grid" Visibility="{Binding ProductManagementPanelVisibility}">
             <Border  Background="#E0E0E0" Visibility="{Binding SelectedProductLWvisibility}" >
 
-                <StackPanel  Background="#E0E0E0"   >
-                    <Button Content="Go back"  Width="100" Command="{Binding ShowSelectedProductCommand}" ></Button>
-                    <Image Source="{Binding SelectedProduct.ImageUri}" Height="220" Width="400"></Image>
-                    <TextBlock Text="{Binding SelectedProduct.Id}"/>
-                    <TextBlock Text="{Binding SelectedProduct.Name}"/>
-                    <TextBlock Text="{Binding SelectedProduct.Description}"/>
-                    <TextBlock Text="{Binding SelectedProduct.Category}"/>
-                </StackPanel>
+                <Grid  Background="#E0E0E0"   >
+                    <Button Background="#00FF00"  Template="{StaticResource Selection_button2_style}" Content="Go back" FontWeight="DemiBold" FontSize="20"  Foreground="White" Command="{Binding ShowSelectedProductCommand}" Margin="670,4,10,229" />
+                    <Border  BorderBrush="Gray" BorderThickness="0" Margin="20,29,430,50">
+                        
+                    <Image  Source="{Binding SelectedProduct.ImageUri}" />
+                    </Border>
+                    <TextBlock  Text="{Binding SelectedProduct.Name}" FontSize="35" FontWeight="ExtraLight" Margin="380,39,145,195"/>
+                    <TextBlock Text="{Binding SelectedProduct.Description}" Margin="380,93,190,110" />
+                    <Border CornerRadius="6"  Background="#FF4500" Margin="595,189,0,0"></Border>
+                    <TextBlock Foreground="White" Text="{Binding SelectedProduct.Price}" FontSize="30" FontWeight="DemiBold" Margin="655,219,50,30" RenderTransformOrigin="0.579,1.165" />
+                    <TextBlock Foreground="White" Text="AZN" FontSize="25" FontWeight="DemiBold" Margin="736,194,5,59" />
+                </Grid>
             </Border>
             <ListView  Background="#E0E0E0"  Height="360" VerticalAlignment="Top" VerticalContentAlignment="Top"  ItemsSource="{Binding CurrentProducts,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedProduct}" Visibility="{Binding ProductLWvisibility}" IsHitTestVisible="{Binding IsEnable}">
                 <ListView.ItemContainerStyle >
@@ -124,7 +128,7 @@
                                         <Image Stretch="UniformToFill" Source="{Binding ImageUri}" HorizontalAlignment="Center" />
                                     </Grid>
                                 </Border>
-                                
+
                                 <TextBlock Margin="-80,0,0,0" Text="{Binding Price}" FontSize="25"  FontWeight="DemiBold"   Width="111" Height="32"/>
                                 <TextBlock Margin="100,-33,0,0" Text="AZN" FontSize="25"  FontWeight="DemiBold"   Width="111" Height="32"/>
                                 <TextBlock Margin="-20,0,0,0" Text="{Binding Name}" FontSize="25"  FontWeight ="ExtraLight"   Width="168" Height="32"/>

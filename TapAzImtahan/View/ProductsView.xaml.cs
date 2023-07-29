@@ -29,5 +29,10 @@ namespace TapAzImtahan.View
         {
 
         }
+
+        private void Button_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
