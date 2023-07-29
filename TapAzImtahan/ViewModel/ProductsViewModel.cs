@@ -12,6 +12,7 @@ using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -23,10 +24,11 @@ namespace TapAzImtahan.ViewModel
 {
     public class ProductsViewModel : INotifyPropertyChanged
     {
+
         public ProductsViewModel()
         {
             CurrentProducts = new ObservableCollection<Product>() { };
-            Products = new ObservableCollection<Product>() { new CarCategory("Mercedes", "S500", 1500, "black", "Deri", 33333, "Ela masindi", "C:\\Users\\Lenova\\Source\\Repos\\TapAzImtahannn\\TapAzImtahan\\Car Pistures\\indir (7).jpeg") };
+            Products = new ObservableCollection<Product>() { new CarCategory("Mercedes", "S500", 1500, "black", "Deri", 33333, "Ela masindi", "C:\\Users\\Crash\\Desktop\\bmw-m8-competition-gran-coupe-modelfinder.png.asset.1643111901255.png") };
             TempProducts = new ObservableCollection<Product>() { };
             carMarkas = new ObservableCollection<CarMarkaClass>();
             selectedCarMarka = new CarMarkaClass();
@@ -41,10 +43,12 @@ namespace TapAzImtahan.ViewModel
             ImageFileDialogCommand = new RelayCommand(ImageFileDialogExecute);
             AddBewCommand = new RelayCommand(OpenCreationPanel);
             BackToMainMenuCommand = new RelayCommand(BackTOMainMenu);
+            SearchCommand = new RelayCommand(SearchExecute, canSearch);
         }
         public ICommand? ShowSelectedProductCommand { get; set; }
         public ICommand? BackToMainMenuCommand { get; set; }
         public ICommand? AddCommand { get; set; }
+        public ICommand? SearchCommand { get; set; }
         public ICommand? EveryProducCommand { get; set; }
         public ICommand? OnlyCarsCommand { get; set; }
         public ICommand? OnlyElectronicsCommand { get; set; }
@@ -61,18 +65,7 @@ namespace TapAzImtahan.ViewModel
         public ObservableCollection<string> CarSalonCategory { get; set; } = new ObservableCollection<string>() { "Koja", "Vlyur" };
         public ObservableCollection<CarMarkaClass> CarMarkas { get => carMarkas; set { carMarkas = value; OnPropertyChanged(nameof(CarMarkas)); } }
         public CarMarkaClass SelectedCarMarka { get => selectedCarMarka; set { selectedCarMarka = value; newCarProduct.Make = selectedCarMarka.name; OnPropertyChanged(nameof(SelectedCarMarka)); } }
-
         public ObservableCollection<string> NewProductCategories { get; set; } = new ObservableCollection<string>() { "Car", "Pet", "Electronics", "Home", "Work" };
-
-        private int selectedCarModelIndex = -1;
-
-        public int SelectedCarModelIndex
-        {
-            get { return selectedCarModelIndex; }
-            set { selectedCarModelIndex = value; newCarProduct.Model = SelectedCarMarka?.models?[SelectedCarModelIndex].name; OnPropertyChanged(nameof(SelectedCarModelIndex)); }
-
-        }
-
 
         public ObservableCollection<ColorsJson> Colors { get => colors; set { colors = value; OnPropertyChanged(nameof(Colors)); } }
 
@@ -103,6 +96,14 @@ namespace TapAzImtahan.ViewModel
                     OnCategoryCHanged(value);
                 }
             }
+        }
+        private int selectedCarModelIndex = -1;
+
+        public int SelectedCarModelIndex
+        {
+            get { return selectedCarModelIndex; }
+            set { selectedCarModelIndex = value; newCarProduct.Model = SelectedCarMarka?.models?[SelectedCarModelIndex].name; OnPropertyChanged(nameof(SelectedCarModelIndex)); }
+
         }
         public void OnCategoryCHanged(string? value)
         {
@@ -145,7 +146,19 @@ namespace TapAzImtahan.ViewModel
                 newCarProduct = value; OnPropertyChanged(nameof(NewCarProduct));
             }
         }
-
+        private string? searchedString;
+        public string? SearchedString
+        {
+            get => searchedString;
+            set
+            {
+                if (searchedString != value)
+                {
+                    searchedString = value;
+                    OnPropertyChanged(nameof(SearchedString));
+                }
+            }
+        }
         private string? selectedComboBoxItem;
         public string? SelectedComboBoxItem
         {
@@ -207,7 +220,7 @@ namespace TapAzImtahan.ViewModel
             set { otherProductVisibility = value; OnPropertyChanged(nameof(OtherProductVisibility)); }
         }
 
-        private Visibility? productLWvisibility = Visibility.Hidden;
+        private Visibility? productLWvisibility = Visibility.Visible;
         public Visibility? ProductLWvisibility
         {
             get { return productLWvisibility; }
@@ -249,6 +262,29 @@ namespace TapAzImtahan.ViewModel
 
             }
         }
+
+        public void SearchExecute(object? parameter)
+        {
+            TempProducts = new ObservableCollection<Product>();
+            for (int i = 0; i < Products.Count; i++)
+            {
+                string pattern = Regex.Escape(SearchedString);
+
+                // Use Regex.Match to find the first match in the target string
+                Match match = Regex.Match(Products[i].Category, pattern,RegexOptions.IgnoreCase);
+
+                if (match.Success)
+                {
+                    TempProducts.Add(Products[i]);
+                }
+            }
+            CurrentProducts = TempProducts;
+        }
+        public bool canSearch(object? parameter)
+        {
+            return SearchedString != null;
+        }
+
 
         public void ShowOnlyCars(object? paarameter)
         {

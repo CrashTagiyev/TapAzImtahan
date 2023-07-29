@@ -31,6 +31,7 @@ namespace TapAzImtahan.Model
             Model = model;
             Name = make + " " + model;
             Motor = motor;
+            Category = "Car";
             Color = color;
             Salon = salon;
             Description += $"\nMotor:{motor}\nColor:{color}\nSalon:{salon}\n\n{description}";
