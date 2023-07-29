@@ -35,7 +35,7 @@ namespace TapAzImtahan.ViewModel
             OtherNewProduct = new Product();
             FillCardMarkaModels();
             FillColors();
-            
+            FakeProducts();
             OnlyCarsCommand = new RelayCommand(ShowOnlyCars);
             OnlyPetsCommand = new RelayCommand(ShowOnlyPet);
             OnlyElectronicsCommand = new RelayCommand(ShowOnlyElectronics);
@@ -130,6 +130,43 @@ namespace TapAzImtahan.ViewModel
         }
 
 
+        private void FakeProducts()
+        {
+            Products.Add(new CarCategory("Toyota", "Camry", 2.5f, "White", "Leather", 28000f, "A reliable family sedan.", "https://listings-prod.tcimg.net/listings/20633/07/65/4T1BZ1HK9JU506507/P3EGJM5ZSXDRC57KB37RB44K3A-cr-540.jpg"));
+            Products.Add(new CarCategory("Honda", "Civic", 1.8f, "Black", "Cloth", 25000f, "Efficient and economical.", "https://bluesky.cdn.imgeng.in/cogstock-images/spincar-0f30092d6006c425afbfb24e90349416c0c715d4.jpg?imgeng=/w_400/"));
+            Products.Add(new CarCategory("Ford", "Mustang", 5.0f, "Red", "Leather", 40000f, "A powerful sports car.", "https://www.svtperformance.com/attachments/73774845-cd2a-4ddd-b589-d19f93c09d9c-jpg.610122/"));
+            Products.Add(new CarCategory("Nissan", "Altima", 2.0f, "Silver", "Leather", 27000f, "Comfortable and spacious.", "https://images.cdn.manheim.com/20230719142543-02423f00-b2d2-4642-895c-0d3e7614a0a1.jpg?size=w344h256"));
+            Products.Add(new CarCategory("Chevrolet", "Malibu", 1.5f, "Blue", "Cloth", 26000f, "Great fuel efficiency.", "https://i.ytimg.com/vi/C7QXlnw_T5c/sddefault.jpg"));
+
+            //Pet
+            Products.Add(new Product("Pet Bed", 29.99f, "Cozy bed for your furry friend.", "Pet", "https://m.media-amazon.com/images/I/61gxx3o19RL._AC_SL1500_.jpg"));
+            Products.Add(new Product("Dog Leash", 12.49f, "Durable leash for walking your dog.", "Pet", "https://ruffwear.com/cdn/shop/products/40354-Roamer-Leash-Granite-Gray.png?crop=center&height=550&v=1676490728&width=820"));
+            Products.Add(new Product("Cat Food Bowl", 9.99f, "Stylish bowl for your cat's meals.", "Pet", "https://media.istockphoto.com/id/181896077/photo/cat-food-bowl.jpg?s=1024x1024&w=is&k=20&c=AWLCXsz07FC84BYVTh0f66gYf4k7HI11Pk4r_RNwuSM="));
+            Products.Add(new Product("Bird Cage", 39.99f, "Spacious cage for your feathered companion.", "Pet", "https://imgprd19.hobbylobby.com/5/5f/15/55f154c59f55a00a0386035a1b18fc4b2e37e6eb/1400Wx1400H-1638592-0618.jpg"));
+            Products.Add(new Product("Fish Tank", 24.99f, "Colorful aquarium for your fish.", "Pet", "https://sparkenzy.com/cdn/shop/products/fishtankcabint_603x700.png?v=1645785154"));
+
+            //Home
+            Products.Add(new Product("Scented Candle", 8.99f, "Relaxing lavender-scented candle.", "Home", "https://cdn.thewirecutter.com/wp-content/media/2021/08/scentedcandles-2048px-0S1A9970-2x1-1.jpg?auto=webp&quality=75&crop=2:1&width=1024"));
+            Products.Add(new Product("Picture Frame", 14.99f, "Elegant frame for your cherished memories.", "Home", "https://cf.ltkcdn.net/antiques/images/orig/262393-1600x1030-antique-picture-frame-styles-values.jpg"));
+            Products.Add(new Product("Throw Blanket", 19.99f, "Soft and warm blanket for your couch.", "Home", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyIcJWtU-5QXWjHfJG7zFAXLnL3w4UvpLeJJxp4qP8HA&s    "));
+            Products.Add(new Product("Cutlery Set", 34.99f, "Complete set of kitchen utensils.", "Home", "https://i5.walmartimages.com/asr/c83d6843-9ee1-4967-b6b8-5c3ce55b6a62.60662f421e4fdd10a7194d0e3b533e39.jpeg"));
+            Products.Add(new Product("Plant Pot", 11.49f, "Decorative pot for your indoor plants.", "Home", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROk16c5k186tNAtzxfEFv_sgrtQ60vZOuDE8Z1rf1F&s"));
+
+           //Electronics
+            Products.Add(new Product("Wireless Mouse", 19.99f, "Responsive wireless mouse for your computer.", "Electronics", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSgMuSKmKDMwGtcIfko-LZfmOvB9l9EMBi5KPtQcPw&s"));
+            Products.Add(new Product("Power Bank", 29.99f, "Portable power bank to charge your devices on the go.", "Electronics", "https://maxi.az/upload/iblock/265/tico0n87l28z5a48hoelodpysdlwi7o2/portativ_enerji_y_ma_cihaz_power_bank_ttec_powerslim_lcd_20_000_mah_powerbank_with_usb_c_input_outpu.webp"));
+            Products.Add(new Product("Bluetooth Headphones", 59.99f, "High-quality headphones for immersive audio.", "Electronics", "https://m.media-amazon.com/images/I/61-g7m+90eL.jpg"));
+            Products.Add(new Product("Smartphone Stand", 12.99f, "Adjustable stand for your smartphone.", "Electronics", "https://www.rollingstone.com/wp-content/uploads/2020/05/Lamicall-Adjustable-Cell-Phone-Stand-FI.jpg?w=996"));
+            Products.Add(new Product("USB-C Cable", 8.49f, "Durable USB-C cable for fast charging.", "Electronics", "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/HN892?wid=4321&hei=3557&fmt=jpeg&qlt=95&.v=1562973652891"));
+
+            //Work
+            Products.Add(new Product("Pen Set", 7.99f, "Professional pen set for your office needs.", "Work", "https://m.media-amazon.com/images/I/61G7vJndSSL.jpg"));
+            Products.Add(new Product("Desk Lamp", 24.99f, "Adjustable desk lamp for better lighting.", "Work", "https://tekled.co.uk/cdn/shop/products/atlas-architect-swing-arm-black-desk-lamp-with-clip-e27-main-image-926202.jpg?v=1680525122"));
+            Products.Add(new Product("Notebook Organizer", 15.49f, "Organizer for your notebooks and stationery.", "Work", "https://assets-production.mochi.media/products/84402/photos/square_thumbnail_247575-myo-a5-notepad-planner-organizer-v2-bd18e8.jpg"));
+            Products.Add(new Product("Document Holder", 9.99f, "Ergonomic holder for your important papers.", "Work", "https://images.kkeu.de/is/image/BEG/Office_Equipment/Add-on_desktops/Document_holder_pdplarge-mrd--000062182534_PRD_org_all.jpg"));
+            Products.Add(new Product("Whiteboard Marker Set", 6.49f, "Vibrant markers for your whiteboard.", "Work", "https://cdn.modulor.de/products/lcr28/1_1920_1920_r_staedtler_lumocolor_whiteboard_marker_set_351_wp8.jpg"));
+
+        }
 
         private string? selectedImageUri;
         public string? SelectedImageUri

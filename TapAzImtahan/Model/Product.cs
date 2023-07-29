@@ -27,26 +27,12 @@ namespace TapAzImtahan.Model
         }
         public Product(float price,string? description, string? imageUri)
         {
-           
-           
             ImageUri = imageUri;
             Price = price;
         }
-        public Product(string? name, string? description, string? category, Image? image)
-        {
-            Name = name;
-            Description =$"\nCategory:{category}\n\n"+ description;
-            Category = category;
-            Image = image;
-        }
+        
 
-        public Product(string? name, string? description, string? category, params Image[]? images)
-        {
-            Name = name;
-            Description = description;
-            Category = category;
-            Images = images;
-        }
+        
 
         public int Id { get; set; } = ++StaticID.SID;
         public string? Name { get; set; }
