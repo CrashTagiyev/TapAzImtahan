@@ -65,7 +65,7 @@
         <ControlTemplate x:Key="Selection_button2_style" TargetType="Button">
 
 
-            <Border x:Name="border" Background="#80FF00" CornerRadius="6" BorderBrush="Gray" BorderThickness="1">
+            <Border x:Name="border"  Background="OrangeRed" CornerRadius="6" BorderBrush="Orange" BorderThickness="1">
                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
