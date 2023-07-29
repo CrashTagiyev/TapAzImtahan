@@ -20,20 +20,22 @@ namespace TapAzImtahan.Model
         public Product(string? name, float price, string? description, string? category, string? imageUri)
         {
             Name = name;
+            Price= price;
             Description = description;
             Category = category;
             ImageUri = imageUri;
         }
         public Product(float price,string? description, string? imageUri)
         {
-            Description = description;
+           
+           
             ImageUri = imageUri;
             Price = price;
         }
         public Product(string? name, string? description, string? category, Image? image)
         {
             Name = name;
-            Description = description;
+            Description =$"\nCategory:{category}\n\n"+ description;
             Category = category;
             Image = image;
         }

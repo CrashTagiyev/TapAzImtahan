@@ -28,7 +28,7 @@ namespace TapAzImtahan.ViewModel
         public ProductsViewModel()
         {
             CurrentProducts = new ObservableCollection<Product>() { };
-            Products = new ObservableCollection<Product>() { new CarCategory("Mercedes", "S500", 1500, "black", "Deri", 150000, "Ela masindi", "C:\\Users\\Lenova\\Source\\Repos\\TapAzImtahanas\\TapAzImtahan\\Car Pistures\\indir (7).jpeg") };
+            Products = new ObservableCollection<Product>() { new CarCategory("Mercedes", "S500", 1500, "Black", "Deri", 150000, "Ela masindi", "https://cdn.discordapp.com/attachments/1057964461455056936/1134866845854335066/bmw-m8-competition-gran-coupe-modelfinder.png.asset.1643111901255.png") };
             TempProducts = new ObservableCollection<Product>() { };
             carMarkas = new ObservableCollection<CarMarkaClass>();
             selectedCarMarka = new CarMarkaClass();
@@ -242,7 +242,7 @@ namespace TapAzImtahan.ViewModel
             set { productManagementPanelVisibility = value; OnPropertyChanged(nameof(ProductManagementPanelVisibility)); }
         }
 
-        private Visibility? selectedProductLWvisibility = Visibility.Hidden;
+        private Visibility? selectedProductLWvisibility = Visibility.Visible;
         public Visibility? SelectedProductLWvisibility
         {
             get { return selectedProductLWvisibility; }
@@ -271,9 +271,9 @@ namespace TapAzImtahan.ViewModel
             for (int i = 0; i < Products.Count; i++)
             {
                 string pattern = Regex.Escape(SearchedString);
-
+                string searching = Products[i].Name+Products[i].Description;
                 // Use Regex.Match to find the first match in the target string
-                Match match = Regex.Match(Products[i].Category, pattern,RegexOptions.IgnoreCase);
+                Match match = Regex.Match(searching, pattern,RegexOptions.IgnoreCase);
 
                 if (match.Success)
                 {
