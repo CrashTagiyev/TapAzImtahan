@@ -35,10 +35,17 @@ namespace TapAzImtahan.ViewModel
             OtherNewProduct = new Product();
             FillCardMarkaModels();
             FillColors();
+            
+            OnlyCarsCommand = new RelayCommand(ShowOnlyCars);
+            OnlyPetsCommand = new RelayCommand(ShowOnlyPet);
+            OnlyElectronicsCommand = new RelayCommand(ShowOnlyElectronics);
+            OnlyHomeCommand = new RelayCommand(ShowOnlyHomes);
+            OnlyWorksCommand = new RelayCommand(ShowOnlyWorks);
+            
+            
             CurrentProducts = Products;
             ShowSelectedProductCommand = new RelayCommand(ShowSelectedProduct);
             AddCommand = new RelayCommand(AddProduct, CanAddProduct);
-            OnlyCarsCommand = new RelayCommand(ShowOnlyCars);
             EveryProducCommand = new RelayCommand(ShowAllProducts);
 
             ImageFileDialogCommand = new RelayCommand(ImageFileDialogExecute);
@@ -53,8 +60,10 @@ namespace TapAzImtahan.ViewModel
         public ICommand? SearchCommand { get; set; }
         public ICommand? EveryProducCommand { get; set; }
         public ICommand? OnlyCarsCommand { get; set; }
-        public ICommand? OnlyElectronicsCommand { get; set; }
         public ICommand? OnlyPetsCommand { get; set; }
+        public ICommand? OnlyElectronicsCommand { get; set; }
+        public ICommand? OnlyHomeCommand { get; set; }
+        public ICommand? OnlyWorksCommand { get; set; }
         public ICommand? ImageFileDialogCommand { get; set; }
         public ICommand? RegisterProductCommand { get; set; }
         public ICommand? AddBewCommand { get; set; }
@@ -300,6 +309,54 @@ namespace TapAzImtahan.ViewModel
             }
             CurrentProducts = TempProducts;
         }
+        public void ShowOnlyPet(object? paarameter)
+        {
+            TempProducts = new ObservableCollection<Product>();
+            for (int i = 0; i < Products.Count; i++)
+            {
+                if (Products[i].Category == "Pet")
+                {
+                    TempProducts.Add(Products[i]);
+                }
+            }
+            CurrentProducts = TempProducts;
+        }
+        public void ShowOnlyElectronics(object? paarameter)
+        {
+            TempProducts = new ObservableCollection<Product>();
+            for (int i = 0; i < Products.Count; i++)
+            {
+                if (Products[i].Category == "Electronics")
+                {
+                    TempProducts.Add(Products[i]);
+                }
+            }
+            CurrentProducts = TempProducts;
+        }
+        public void ShowOnlyHomes(object? paarameter)
+        {
+            TempProducts = new ObservableCollection<Product>();
+            for (int i = 0; i < Products.Count; i++)
+            {
+                if (Products[i].Category == "Home")
+                {
+                    TempProducts.Add(Products[i]);
+                }
+            }
+            CurrentProducts = TempProducts;
+        }
+        public void ShowOnlyWorks(object? paarameter)
+        {
+            TempProducts = new ObservableCollection<Product>();
+            for (int i = 0; i < Products.Count; i++)
+            {
+                if (Products[i].Category == "Work")
+                {
+                    TempProducts.Add(Products[i]);
+                }
+            }
+            CurrentProducts = TempProducts;
+        }
         public void ShowAllProducts(object? paarameter)
         {
             TempProducts = new ObservableCollection<Product>();
@@ -384,6 +441,29 @@ namespace TapAzImtahan.ViewModel
 
             // Replace 'YourNamespace' with the namespace where the JSON file is located
             string resourceName = "TapAzImtahan.JsonFiles." + fileName;
+
+            // Open the embedded resource stream
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream != null)
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        result = reader.ReadToEnd();
+                    }
+                }
+            }
+            return result;
+        }
+        public string ReadEmbeddedImagePath(string ImageName)
+        {
+            string result = string.Empty;
+
+            // Get the assembly where the embedded resource is located
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            // Replace 'YourNamespace' with the namespace where the JSON file is located
+            string resourceName = "TapAzImtahan.Car Pistures." + ImageName;
 
             // Open the embedded resource stream
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))

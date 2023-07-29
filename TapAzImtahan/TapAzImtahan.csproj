@@ -10,8 +10,13 @@
   <ItemGroup>
     <None Remove="Car Pistures\images %281%29.jpeg" />
     <None Remove="Car Pistures\images %282%29.jpeg" />
+    <None Remove="Car Pistures\indir %289%29.jpeg" />
     <None Remove="JsonFiles\cars.json" />
     <None Remove="JsonFiles\colors.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Car Pistures\indir (9).jpeg" />
   </ItemGroup>
 
   <ItemGroup>
